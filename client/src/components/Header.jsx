@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import HeaderContainer from '../containers/HeaderContainer';
 import HeaderButtonsContainer from '../containers/HeaderButtonsContainer';
+import ButtonContainer from '../containers/ButtonContainer';
 import logo from '../assets/icons/a-logo.svg';
 
 class Header extends PureComponent{
@@ -8,9 +9,15 @@ class Header extends PureComponent{
         return(
             <HeaderContainer>
                 <HeaderButtonsContainer>
-                    <div>WOMEN</div>
-                    <div>MEN</div>
-                    <div>KIDS</div>
+                    <ButtonContainer>
+                        <div>WOMEN</div>
+                    </ButtonContainer>
+                    <ButtonContainer>
+                        <div>MEN</div>
+                    </ButtonContainer>
+                    <ButtonContainer>
+                        <div>KIDS</div>
+                    </ButtonContainer>
                 </HeaderButtonsContainer>
                 <img src={logo} alt="Header logo" />
                 <HeaderButtonsContainer>

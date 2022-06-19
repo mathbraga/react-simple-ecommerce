@@ -9,7 +9,6 @@ const HeaderButtonsContainer = styled.div`
 
     &:first-child{
         justify-content: flex-start;
-        gap: 6%;
     }
 
     &:last-child{
