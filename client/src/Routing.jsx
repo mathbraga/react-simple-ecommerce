@@ -6,6 +6,9 @@ import {
     Navigate
 } from "react-router-dom";
 import Header from "./components/Header";
+import Women from "./pages/Women";
+import Men from "./pages/Men";
+import Kids from "./pages/Kids";
 
 class Routing extends PureComponent {
     render(){
@@ -14,9 +17,9 @@ class Routing extends PureComponent {
                 <Header />
                 <BrowserRouter>
                     <Routes>
-                        <Route path="women" element={<div>women</div>} />
-                        <Route path="men" element={<div>men</div>} />
-                        <Route path="kids" element={<div>kids</div>} />
+                        <Route path="women" element={<Women />} />
+                        <Route path="men" element={<Men />} />
+                        <Route path="kids" element={<Kids />} />
                         <Route path="*" element={<Navigate to="women" />} />
                     </Routes>
                 </BrowserRouter>
