@@ -14,8 +14,8 @@ class Routing extends PureComponent {
     render(){
         return(
             <>
-                <Header />
                 <BrowserRouter>
+                    <Header />
                     <Routes>
                         <Route path="women" element={<Women />} />
                         <Route path="men" element={<Men />} />
