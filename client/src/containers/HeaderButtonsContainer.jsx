@@ -20,6 +20,8 @@ const HeaderButtonsContainer = styled.div`
         text-decoration: none;
 
         height: 100%;
+        box-sizing: border-box;
+        border-bottom: 2px solid transparent;
     }
 
     .temporary-class{
@@ -28,6 +30,11 @@ const HeaderButtonsContainer = styled.div`
         align-items: center;
 
         height: auto;
+    }
+
+    .active-page{
+        border-bottom: 2px solid var(--color-smooth-green);
+        color: var(--color-smooth-green);
     }
 `;
 

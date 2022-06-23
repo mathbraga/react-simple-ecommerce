@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import HeaderButtonsContainer from '../containers/HeaderButtonsContainer';
 import ButtonContainer from '../containers/ButtonContainer';
@@ -7,25 +7,38 @@ import logoIcon from '../assets/icons/a-logo.svg';
 import cartIcon from '../assets/icons/cart.svg';
 
 class Header extends PureComponent{
+    handleActiveLink = (isActive) => {
+        return isActive ? "active-page" : null;
+    }
+
     render(){
         return(
             <HeaderContainer>
                 <HeaderButtonsContainer>
-                    <Link to="women">
+                    <NavLink 
+                        to="women"
+                        className={({isActive}) => this.handleActiveLink(isActive)}
+                    >
                         <ButtonContainer>
                             WOMEN
                         </ButtonContainer>
-                    </Link>
-                    <Link to="men">
+                    </NavLink>
+                    <NavLink 
+                        to="men"
+                        className={({isActive}) => this.handleActiveLink(isActive)}
+                    >
                         <ButtonContainer>
                             MEN
                         </ButtonContainer>
-                    </Link>
-                    <Link to="kids">
+                    </NavLink>
+                    <NavLink 
+                        to="kids"
+                        className={({isActive}) => this.handleActiveLink(isActive)}
+                    >
                         <ButtonContainer>
                             KIDS
                         </ButtonContainer>
-                    </Link>
+                    </NavLink>
                 </HeaderButtonsContainer>
                 <img src={logoIcon} alt="Header logo" />
                 <HeaderButtonsContainer>

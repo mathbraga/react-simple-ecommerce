@@ -4,19 +4,14 @@ const ButtonContainer = styled.div`
     font-weight: 500;
     font-size: 1rem;
     line-height: 120%;
+    color: inherit;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     height: 100%;
-    box-sizing: border-box;
-    border-bottom: 2px solid transparent;
     padding: 0 16px;
-
-    &:hover{
-        border-bottom: 2px solid var(--color-smooth-green);
-    }
 `;
 
 export default ButtonContainer;
