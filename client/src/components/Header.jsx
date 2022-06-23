@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import HeaderContainer from '../containers/HeaderContainer';
 import HeaderButtonsContainer from '../containers/HeaderButtonsContainer';
 import ButtonContainer from '../containers/ButtonContainer';
-import logo from '../assets/icons/a-logo.svg';
+import logoIcon from '../assets/icons/a-logo.svg';
+import cartIcon from '../assets/icons/cart.svg';
 
 class Header extends PureComponent{
     render(){
@@ -26,10 +27,10 @@ class Header extends PureComponent{
                         </ButtonContainer>
                     </Link>
                 </HeaderButtonsContainer>
-                <img src={logo} alt="Header logo" />
+                <img src={logoIcon} alt="Header logo" />
                 <HeaderButtonsContainer>
                     <div className='temporary-class' style={{marginRight: '16px'}}>$</div>
-                    <div className='temporary-class'>CART</div>
+                    <img src={cartIcon} alt="Cart" className='temporary-class' />
                 </HeaderButtonsContainer>
             </HeaderContainer>
         );

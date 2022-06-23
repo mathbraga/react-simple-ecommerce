@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const ButtonContainer = styled.div`
-    font-family: 'Raleway';
-    font-style: normal;
     font-weight: 500;
     font-size: 1rem;
     line-height: 120%;
