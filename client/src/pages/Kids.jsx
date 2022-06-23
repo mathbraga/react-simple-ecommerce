@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
+import PageContainer from "../containers/PageContainer";
 
 class Kids extends PureComponent {
     render(){
         return(
-            <div>Kids Category</div>
+            <PageContainer>Kids Wear</PageContainer>
         );
     }
 }

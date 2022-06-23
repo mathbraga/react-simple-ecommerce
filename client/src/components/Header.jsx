@@ -7,9 +7,7 @@ import logoIcon from '../assets/icons/a-logo.svg';
 import cartIcon from '../assets/icons/cart.svg';
 
 class Header extends PureComponent{
-    handleActiveLink = (isActive) => {
-        return isActive ? "active-page" : null;
-    }
+    handleActiveLink = (isActive) => isActive ? "active-page" : null;
 
     render(){
         return(

@@ -13,7 +13,7 @@ const HeaderContainer = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    padding: 0 100px;
+    padding: 0 96px;
     box-sizing: border-box;
 `;
 
