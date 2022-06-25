@@ -14,27 +14,27 @@ class Header extends PureComponent{
             <HeaderContainer>
                 <HeaderButtonsContainer>
                     <NavLink 
-                        to="women"
+                        to="all"
                         className={({isActive}) => this.handleActiveLink(isActive)}
                     >
                         <ButtonContainer>
-                            WOMEN
+                            ALL
                         </ButtonContainer>
                     </NavLink>
                     <NavLink 
-                        to="men"
+                        to="tech"
                         className={({isActive}) => this.handleActiveLink(isActive)}
                     >
                         <ButtonContainer>
-                            MEN
+                            TECH
                         </ButtonContainer>
                     </NavLink>
                     <NavLink 
-                        to="kids"
+                        to="clothes"
                         className={({isActive}) => this.handleActiveLink(isActive)}
                     >
                         <ButtonContainer>
-                            KIDS
+                            CLOTHES
                         </ButtonContainer>
                     </NavLink>
                 </HeaderButtonsContainer>

@@ -2,14 +2,14 @@ import React, { PureComponent } from "react";
 import PageContainer from "../containers/PageContainer";
 import PageTitle from "../components/PageTitle";
 
-class Kids extends PureComponent {
+class TechProducts extends PureComponent {
     render(){
         return(
             <PageContainer>
-                <PageTitle>Kids wear</PageTitle>
+                <PageTitle>Tech</PageTitle>
             </PageContainer>
         );
     }
 }
 
-export default Kids;
+export default TechProducts;

@@ -1,15 +1,15 @@
 import React, { PureComponent } from "react";
-import PageContainer from "../containers/PageContainer";
 import PageTitle from "../components/PageTitle";
+import PageContainer from "../containers/PageContainer";
 
-class Men extends PureComponent {
+class AllProducts extends PureComponent {
     render(){
         return(
             <PageContainer>
-                <PageTitle>Men wear</PageTitle>
+                <PageTitle>All</PageTitle>
             </PageContainer>
         );
     }
 }
 
-export default Men;
+export default AllProducts;
