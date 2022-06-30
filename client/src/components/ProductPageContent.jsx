@@ -24,10 +24,11 @@ class ProductPageContent extends PureComponent {
         const currency = new Field('currency', true).addFieldList(currencyFields);
         const priceFields = [currency, 'amount'];
         const prices = new Field('prices', true).addFieldList(priceFields);
-        const productFields = ['id', 'name', 'inStock', 'gallery', 'description', 
-        'category', attributes, prices, 'brand'];
+        const productFields = ['id', 'name', 'inStock', 'gallery', 'description',
+            attributes, prices, 'brand'];
         const products = new Field('products', true).addFieldList(productFields);
         const query = new Query('category', true)
+            .addArgument('input', 'CategoryInput', {'title': this.props.categoryName})
             .addField(products);
 
         return query;
@@ -48,15 +49,7 @@ class ProductPageContent extends PureComponent {
             <div>
                 {this.state.products['category'] ? 
                     this.state.products['category'].products
-                        .map((item, index) => {
-                            if(this.props.category)
-                                return (
-                                    item.category === this.props.category ? 
-                                        <div key={index}>{item.name}</div> : null
-                                )
-                            else
-                                return <div key={index}>{item.name}</div>
-                        }) 
+                        .map((item, index) => <div key={index}>{item.name}</div>) 
                     : 
                     null
                 }

@@ -7,8 +7,8 @@ class AllProducts extends PureComponent {
     render(){
         return(
             <PageContainer>
-                <PageTitle>All</PageTitle>
-                <ProductPageContent />
+                <PageTitle>{"All"}</PageTitle>
+                <ProductPageContent categoryName="all" />
             </PageContainer>
         );
     }

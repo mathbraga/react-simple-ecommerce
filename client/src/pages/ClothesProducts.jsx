@@ -8,7 +8,7 @@ class ClothesProducts extends PureComponent {
         return(
             <PageContainer>
                 <PageTitle>{"Clothes"}</PageTitle>
-                <ProductPageContent category="clothes" />
+                <ProductPageContent categoryName="clothes" />
             </PageContainer>
         );
     }

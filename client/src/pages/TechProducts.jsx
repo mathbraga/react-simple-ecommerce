@@ -7,8 +7,8 @@ class TechProducts extends PureComponent {
     render(){
         return(
             <PageContainer>
-                <PageTitle>Tech</PageTitle>
-                <ProductPageContent category="tech" />
+                <PageTitle>{"Tech"}</PageTitle>
+                <ProductPageContent categoryName="tech" />
             </PageContainer>
         );
     }
