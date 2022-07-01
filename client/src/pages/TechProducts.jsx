@@ -1,17 +1,5 @@
-import React, { PureComponent } from "react";
-import PageContainer from "../containers/PageContainer";
-import PageTitle from "../components/PageTitle";
-import ProductPageContent from "../components/ProductPageContent";
+import ProductsListing from "./ProductsListing";
 
-class TechProducts extends PureComponent {
-    render(){
-        return(
-            <PageContainer>
-                <PageTitle>{"Tech"}</PageTitle>
-                <ProductPageContent categoryName="tech" />
-            </PageContainer>
-        );
-    }
-}
+class TechProducts extends ProductsListing {};
 
 export default TechProducts;

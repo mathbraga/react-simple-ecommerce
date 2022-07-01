@@ -17,9 +17,9 @@ class Routing extends PureComponent {
                 <BrowserRouter>
                     <Header />
                     <Routes>
-                        <Route path="all" element={<AllProducts />} />
-                        <Route path="tech" element={<TechProducts />} />
-                        <Route path="clothes" element={<ClothesProducts />} />
+                        <Route path="all" element={<AllProducts pageTitle="All" category="all" />} />
+                        <Route path="tech" element={<TechProducts pageTitle="Tech" category="tech" />} />
+                        <Route path="clothes" element={<ClothesProducts pageTitle="Clothes" category="clothes" />} />
                         <Route path="*" element={<Navigate to="all" />} />
                     </Routes>
                 </BrowserRouter>
