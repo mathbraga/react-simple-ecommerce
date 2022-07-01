@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { client, Query, Field } from "@tilework/opus";
+import PropTypes from "prop-types";
 
 class ProductPageContent extends PureComponent {
     constructor(props){
@@ -57,5 +58,9 @@ class ProductPageContent extends PureComponent {
         );
     }
 }
+
+ProductPageContent.propTypes = {
+    categoryName: PropTypes.string.isRequired
+};
 
 export default ProductPageContent;
