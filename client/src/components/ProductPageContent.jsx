@@ -38,7 +38,7 @@ class ProductPageContent extends PureComponent {
     queryCategoriesNames = async () => {
         const query = this.prepareQuery();
         const result = await client.post(query);
-        this.handleState(result);
+        this.handleState(result.category.products);
     }
 
     componentDidMount = () => {
@@ -48,11 +48,9 @@ class ProductPageContent extends PureComponent {
     render(){
         return(
             <div>
-                {this.state.products['category'] ? 
-                    this.state.products['category'].products
-                        .map((item, index) => <div key={index}>{item.name}</div>) 
-                    : 
-                    null
+                {
+                this.state.products
+                    .map((item, index) => <div key={index}>{item.name}</div>)
                 }
             </div>
         );

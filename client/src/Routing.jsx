@@ -9,11 +9,12 @@ import Header from "./components/Header";
 import AllProducts from "./pages/AllProducts";
 import TechProducts from "./pages/TechProducts";
 import ClothesProducts from "./pages/ClothesProducts";
+import FullAppContainer from "./containers/FullAppContainer";
 
 class Routing extends PureComponent {
     render(){
         return(
-            <>
+            <FullAppContainer>
                 <BrowserRouter>
                     <Header />
                     <Routes>
@@ -23,7 +24,7 @@ class Routing extends PureComponent {
                         <Route path="*" element={<Navigate to="all" />} />
                     </Routes>
                 </BrowserRouter>
-            </>
+            </FullAppContainer>
         );
     }
 }
