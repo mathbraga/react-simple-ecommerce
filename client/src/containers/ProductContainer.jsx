@@ -21,12 +21,12 @@ const ProductContainer = styled.div`
     }
 
     .product-name{
-        font-size: 18px;
+        font-size: 1.125rem;
         font-weight: 300;
     }
 
     .product-price{
-        font-size: 18px;
+        font-size: 1.125rem;
         font-weight: 500;
     }
 
