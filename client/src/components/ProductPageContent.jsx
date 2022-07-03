@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import { client, Query, Field } from "@tilework/opus";
 import PropTypes from "prop-types";
+import Product from "./Product";
+import ProductsGrid from "../containers/ProductsGrid";
 
 class ProductPageContent extends PureComponent {
     constructor(props){
@@ -47,12 +49,10 @@ class ProductPageContent extends PureComponent {
 
     render(){
         return(
-            <div>
-                {
-                this.state.products
-                    .map((item, index) => <div key={index}>{item.name}</div>)
-                }
-            </div>
+            <ProductsGrid>
+                {this.state.products
+                    .map((item, index) => <Product key={index} />)}
+            </ProductsGrid>
         );
     }
 }
