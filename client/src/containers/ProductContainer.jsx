@@ -31,7 +31,7 @@ const ProductContainer = styled.div`
     }
 
     &:hover{
-        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
     }
 `;
 

@@ -40,18 +40,27 @@ class ProductPageContent extends PureComponent {
     queryCategoriesNames = async () => {
         const query = this.prepareQuery();
         const result = await client.post(query);
-        this.handleState(result.category.products);
+        this.handleState(result);
     }
 
     componentDidMount = () => {
         this.queryCategoriesNames();
     }
 
+    componentDidUpdate = (prevProps) => {
+        if(prevProps.categoryName !== this.props.categoryName)
+            this.queryCategoriesNames();
+    }
+
     render(){
         return(
             <ProductsGrid>
-                {this.state.products
-                    .map((item, index) => <Product key={index} data={item} />)}
+                {this.state.products.category ?
+                    this.state.products.category.products.map(
+                        (item, index) => <Product key={index} data={item} />
+                    )
+                    :
+                    null}
             </ProductsGrid>
         );
     }

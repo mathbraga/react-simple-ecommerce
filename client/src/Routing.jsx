@@ -6,10 +6,8 @@ import {
     Navigate
 } from "react-router-dom";
 import Header from "./components/Header";
-import AllProducts from "./pages/AllProducts";
-import TechProducts from "./pages/TechProducts";
-import ClothesProducts from "./pages/ClothesProducts";
 import FullAppContainer from "./containers/FullAppContainer";
+import ProductsListing from "./pages/ProductsListing";
 
 class Routing extends PureComponent {
     render(){
@@ -18,9 +16,9 @@ class Routing extends PureComponent {
                 <BrowserRouter>
                     <Header />
                     <Routes>
-                        <Route path="all" element={<AllProducts pageTitle="All" category="all" />} />
-                        <Route path="tech" element={<TechProducts pageTitle="Tech" category="tech" />} />
-                        <Route path="clothes" element={<ClothesProducts pageTitle="Clothes" category="clothes" />} />
+                        <Route path="all" element={<ProductsListing pageTitle="All" category="all" />} />
+                        <Route path="tech" element={<ProductsListing pageTitle="Tech" category="tech" />} />
+                        <Route path="clothes" element={<ProductsListing pageTitle="Clothes" category="clothes" />} />
                         <Route path="*" element={<Navigate to="all" />} />
                     </Routes>
                 </BrowserRouter>
