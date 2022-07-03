@@ -35,6 +35,7 @@ const HeaderButtonsContainer = styled.div`
     .active-page{
         border-bottom: 2px solid var(--color-smooth-green);
         color: var(--color-smooth-green);
+        font-weight: 600;
     }
 `;
 

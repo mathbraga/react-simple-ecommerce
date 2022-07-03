@@ -51,7 +51,7 @@ class ProductPageContent extends PureComponent {
         return(
             <ProductsGrid>
                 {this.state.products
-                    .map((item, index) => <Product key={index} />)}
+                    .map((item, index) => <Product key={index} data={item} />)}
             </ProductsGrid>
         );
     }
