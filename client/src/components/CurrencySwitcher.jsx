@@ -18,8 +18,8 @@ const Styles = styled.div`
 
     .currency-arrow{
         margin-left: 6px;
-        transition: transform 200ms;
-        transform: rotate(${props => props.arrowDeg});
+        transition: transform 250ms;
+        transform: rotate3d(1, 0, 0, ${props => props.arrowDeg});
     }
 `;
 
