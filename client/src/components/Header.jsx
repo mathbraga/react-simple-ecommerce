@@ -4,8 +4,8 @@ import HeaderContainer from '../containers/HeaderContainer';
 import HeaderButtonsContainer from '../containers/HeaderButtonsContainer';
 import ButtonContainer from '../containers/ButtonContainer';
 import logoIcon from '../assets/icons/a-logo.svg';
-import cartIcon from '../assets/icons/cart.svg';
 import CurrencySwitcher from './CurrencySwitcher';
+import Cart from './Cart';
 
 class Header extends PureComponent{
     handleActiveLink = (isActive) => isActive ? "active-page" : null;
@@ -42,7 +42,7 @@ class Header extends PureComponent{
                 <img src={logoIcon} alt="Header logo" />
                 <HeaderButtonsContainer>
                     <CurrencySwitcher />
-                    <img src={cartIcon} alt="Cart" className='header-interactable-icon' />
+                    <Cart />
                 </HeaderButtonsContainer>
             </HeaderContainer>
         );
