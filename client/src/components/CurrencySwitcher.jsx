@@ -18,15 +18,35 @@ const Styles = styled.div`
 
     .currency-arrow{
         margin-left: 6px;
+        transition: transform 200ms;
+        transform: rotate(${props => props.arrowDeg});
     }
 `;
 
 class CurrencySwitcher extends PureComponent {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            arrowDeg: false
+        }
+    }
+
+    handleClick = () => {
+        this.setState((state) => {
+            return {arrowDeg: !state.arrowDeg}
+        })
+    };
+
+    handleArrowDegree = () => {
+        return this.state.arrowDeg ? "180deg" : "0deg";
+    }
+
     render(){
         return(
-            <Styles>
+            <Styles onClick={this.handleClick} arrowDeg={this.handleArrowDegree}>
                 <div>$</div>
-                <img src={downArrow} alt="v" className='currency-arrow' />
+                <img src={downArrow} alt="arrow down" className="currency-arrow" />
             </Styles>
         )
     }
