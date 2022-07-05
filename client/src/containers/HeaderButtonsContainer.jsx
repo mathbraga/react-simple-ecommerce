@@ -3,6 +3,7 @@ import styled from "styled-components";
 const HeaderButtonsContainer = styled.div`
     flex: 1;
     display: flex;
+    justify-content: center;
     align-items: center;
 
     height: 100%;
@@ -24,12 +25,19 @@ const HeaderButtonsContainer = styled.div`
         border-bottom: 2px solid transparent;
     }
 
-    .temporary-class{
+    .header-interactable-icon{
+        position: relative;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: baseline;
 
         height: auto;
+
+        color: var(--color-black);
+        font-weight: 500;
+        font-size: 1.125rem;
+
+        cursor: pointer;
     }
 
     .active-page{

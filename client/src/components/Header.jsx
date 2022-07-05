@@ -5,6 +5,7 @@ import HeaderButtonsContainer from '../containers/HeaderButtonsContainer';
 import ButtonContainer from '../containers/ButtonContainer';
 import logoIcon from '../assets/icons/a-logo.svg';
 import cartIcon from '../assets/icons/cart.svg';
+import CurrencySwitcher from './CurrencySwitcher';
 
 class Header extends PureComponent{
     handleActiveLink = (isActive) => isActive ? "active-page" : null;
@@ -40,8 +41,8 @@ class Header extends PureComponent{
                 </HeaderButtonsContainer>
                 <img src={logoIcon} alt="Header logo" />
                 <HeaderButtonsContainer>
-                    <div className='temporary-class' style={{marginRight: '16px'}}>$</div>
-                    <img src={cartIcon} alt="Cart" className='temporary-class' />
+                    <CurrencySwitcher />
+                    <img src={cartIcon} alt="Cart" className='header-interactable-icon' />
                 </HeaderButtonsContainer>
             </HeaderContainer>
         );
