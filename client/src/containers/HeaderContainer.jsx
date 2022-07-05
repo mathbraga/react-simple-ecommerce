@@ -4,7 +4,7 @@ const HeaderContainer = styled.div`
     position: relative;
 
     width: 100%;
-    height: 80px;
+    height: 5rem;
     left: 0;
     top: 0;
 

@@ -8,7 +8,7 @@ import CurrencySwitcher from './CurrencySwitcher';
 import Cart from './Cart';
 
 class Header extends PureComponent{
-    handleActiveLink = (isActive) => isActive ? "active-page" : null;
+    handleActiveLink = (isActive) => isActive ? "active-page" : "page-link";
 
     render(){
         return(

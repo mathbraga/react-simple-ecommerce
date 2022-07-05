@@ -18,11 +18,8 @@ const HeaderButtonsContainer = styled.div`
 
     *{
         color: var(--color-black);
-        text-decoration: none;
 
         height: 100%;
-        box-sizing: border-box;
-        border-bottom: 2px solid transparent;
     }
 
     .header-interactable-icon{
@@ -40,10 +37,20 @@ const HeaderButtonsContainer = styled.div`
         cursor: pointer;
     }
 
+    .page-link{
+        box-sizing: border-box;
+        border-bottom: 2px solid transparent;
+
+        text-decoration: none;
+    }
+
     .active-page{
+        box-sizing: border-box;
         border-bottom: 2px solid var(--color-smooth-green);
         color: var(--color-smooth-green);
         font-weight: 600;
+
+        text-decoration: none;
     }
 `;
 

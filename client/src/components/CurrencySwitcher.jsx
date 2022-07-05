@@ -21,6 +21,28 @@ const Styles = styled.div`
         transition: transform 250ms;
         transform: rotate3d(1, 0, 0, ${props => props.arrowDeg});
     }
+
+    .currency-menu{
+        display: ${props => props.displayMenu};
+        position: absolute;
+        top: 100%;
+        height: auto;
+        padding: 10px 0;
+
+        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
+
+        cursor: default;
+
+        .currency-option{
+            padding: 10px 20px;
+
+            cursor: pointer;
+        }
+
+        .currency-option:hover{
+            background-color: #EEEEEE;
+        }
+    }
 `;
 
 class CurrencySwitcher extends PureComponent {
@@ -28,25 +50,34 @@ class CurrencySwitcher extends PureComponent {
         super(props);
 
         this.state = {
-            arrowDeg: false
+            displayMenu: false
         }
     }
 
     handleClick = () => {
         this.setState((state) => {
-            return {arrowDeg: !state.arrowDeg}
+            return {displayMenu: !state.displayMenu}
         })
     };
 
     handleArrowDegree = () => {
-        return this.state.arrowDeg ? "180deg" : "0deg";
+        return this.state.displayMenu ? "180deg" : "0deg";
+    }
+
+    handleMenu = () => {
+        return this.state.displayMenu ? "block" : "none";
     }
 
     render(){
         return(
-            <Styles onClick={this.handleClick} arrowDeg={this.handleArrowDegree}>
+            <Styles onClick={this.handleClick} arrowDeg={this.handleArrowDegree} displayMenu={this.handleMenu}>
                 <div>$</div>
                 <img src={downArrow} alt="arrow down" className="currency-arrow" />
+                <div className="currency-menu">
+                    <div className="currency-option">$ USD</div>
+                    <div className="currency-option">€ EUR</div>
+                    <div className="currency-option">¥ JPY</div>
+                </div>
             </Styles>
         )
     }
