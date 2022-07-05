@@ -2,10 +2,15 @@ import React, { PureComponent } from "react";
 import ProductContainer from "../containers/ProductContainer";
 
 class Product extends PureComponent {
+    isInStock = () => {
+        return this.props.data.inStock;
+    }
+
     render(){
         return(
-            <ProductContainer>
+            <ProductContainer className={this.isInStock() ? "" : "no-stock"}>
                 <div className="product-image">
+                    {this.isInStock() ? null : <div className="no-stock-notice">OUT OF STOCK</div>}
                     <img src={this.props.data.gallery[0]} alt="Product images" />
                 </div>
                 <div className="product-name">{`${this.props.data.brand} ${this.props.data.name}`}</div>
