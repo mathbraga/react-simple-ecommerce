@@ -24,6 +24,7 @@ const ProductContainer = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-bottom: 24px;
 
         .no-stock-notice{
             position: absolute;
@@ -47,6 +48,8 @@ const ProductContainer = styled.div`
     .product-price{
         font-size: 1.125rem;
         font-weight: 500;
+
+        padding: 4px 0;
     }
 
     &:hover{
