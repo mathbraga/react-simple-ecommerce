@@ -42,7 +42,7 @@ class CurrencyMenu extends PureComponent {
 
     render(){
         return(
-            <Styles id="currency-menu">
+            <Styles>
                 <div className="currency-option">$ USD</div>
                 <div className="currency-option">€ EUR</div>
                 <div className="currency-option">¥ JPY</div>
