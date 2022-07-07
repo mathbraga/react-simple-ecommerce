@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import downArrow from '../assets/icons/arrow.svg';
+import CurrencyMenu from "./CurrencyMenu";
 
 const Styles = styled.div`
     display: flex;
@@ -22,26 +23,8 @@ const Styles = styled.div`
         transform: rotate3d(1, 0, 0, ${props => props.arrowDeg});
     }
 
-    .currency-menu{
-        display: ${props => props.displayMenu};
-        position: absolute;
-        top: 100%;
-        height: auto;
-        padding: 10px 0;
-
-        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
-
-        cursor: default;
-
-        .currency-option{
-            padding: 10px 20px;
-
-            cursor: pointer;
-        }
-
-        .currency-option:hover{
-            background-color: #EEEEEE;
-        }
+    .no-pointer-events{
+        pointer-events: none;
     }
 `;
 
@@ -52,32 +35,37 @@ class CurrencySwitcher extends PureComponent {
         this.state = {
             displayMenu: false
         }
+
+        this.switcherBtnId = "currency-btn";
     }
 
-    handleClick = () => {
+    handleMenuClick = () => {
         this.setState((state) => {
-            return {displayMenu: !state.displayMenu}
-        })
+            return { displayMenu: !state.displayMenu }
+        });
     };
 
     handleArrowDegree = () => {
         return this.state.displayMenu ? "180deg" : "0deg";
     }
 
-    handleMenu = () => {
-        return this.state.displayMenu ? "block" : "none";
-    }
-
     render(){
         return(
-            <Styles onClick={this.handleClick} arrowDeg={this.handleArrowDegree} displayMenu={this.handleMenu}>
-                <div>$</div>
-                <img src={downArrow} alt="arrow down" className="currency-arrow" />
-                <div className="currency-menu">
-                    <div className="currency-option">$ USD</div>
-                    <div className="currency-option">€ EUR</div>
-                    <div className="currency-option">¥ JPY</div>
-                </div>
+            <Styles
+                id={this.switcherBtnId}
+                onClick={this.handleMenuClick} 
+                arrowDeg={this.handleArrowDegree} 
+                displayMenu={this.handleMenu}
+            >
+                <div className="no-pointer-events">$</div>
+                <img src={downArrow} alt="arrow down" className="currency-arrow no-pointer-events" />
+                {this.state.displayMenu ? 
+                    <CurrencyMenu 
+                        triggererId={this.switcherBtnId} 
+                        trigger={this.handleMenuClick}
+                    /> 
+                    : 
+                    null}
             </Styles>
         )
     }
