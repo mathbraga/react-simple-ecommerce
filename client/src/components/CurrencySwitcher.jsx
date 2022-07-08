@@ -90,7 +90,7 @@ class CurrencySwitcher extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    defaultCurrency: state.defaultCurrency
+    defaultCurrency: state.currency.defaultCurrency
 })
 
 export default connect(mapStateToProps)(CurrencySwitcher);
