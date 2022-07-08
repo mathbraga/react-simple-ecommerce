@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { update } from "../store/reducers/currencySlice";
 import styled from "styled-components";
 import downArrow from '../assets/icons/arrow.svg';
 import CurrencyMenu from "./CurrencyMenu";
@@ -81,6 +82,7 @@ class CurrencySwitcher extends PureComponent {
                         triggererId={this.switcherBtnId} 
                         trigger={this.handleMenuClick}
                         currencies={this.state.currencyList}
+                        updater={this.props.updateCurrency}
                     /> 
                     : 
                     null}
@@ -91,6 +93,10 @@ class CurrencySwitcher extends PureComponent {
 
 const mapStateToProps = (state) => ({
     defaultCurrency: state.currency.defaultCurrency
-})
+});
 
-export default connect(mapStateToProps)(CurrencySwitcher);
+const mapDispatchToProps = (dispatch) => ({
+    updateCurrency: (currency) => dispatch(update(currency))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencySwitcher);

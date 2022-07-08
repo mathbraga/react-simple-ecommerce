@@ -9,7 +9,8 @@ export const currencySlice = createSlice({
     initialState,
     reducers: {
         update: (state, action) => {
-            state.defaultCurrency = action.payload
+            localStorage.currency = action.payload;
+            state.defaultCurrency = action.payload;
         }
     }
 });
