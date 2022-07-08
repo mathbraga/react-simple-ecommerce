@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import downArrow from '../assets/icons/arrow.svg';
 import CurrencyMenu from "./CurrencyMenu";
@@ -73,7 +74,7 @@ class CurrencySwitcher extends PureComponent {
                 arrowDeg={this.handleArrowDegree} 
                 displayMenu={this.handleMenu}
             >
-                <div className="no-pointer-events">$</div>
+                <div className="no-pointer-events">{this.props.defaultCurrency}</div>
                 <img src={downArrow} alt="arrow down" className="currency-arrow no-pointer-events" />
                 {this.state.displayMenu ? 
                     <CurrencyMenu 
@@ -88,4 +89,8 @@ class CurrencySwitcher extends PureComponent {
     }
 }
 
-export default CurrencySwitcher;
+const mapStateToProps = (state) => ({
+    defaultCurrency: state.defaultCurrency
+})
+
+export default connect(mapStateToProps)(CurrencySwitcher);
