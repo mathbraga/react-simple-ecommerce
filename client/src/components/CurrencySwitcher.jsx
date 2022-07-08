@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import styled from "styled-components";
 import downArrow from '../assets/icons/arrow.svg';
 import CurrencyMenu from "./CurrencyMenu";
+import { client, Query } from "@tilework/opus";
 
 const Styles = styled.div`
     display: flex;
@@ -33,7 +34,8 @@ class CurrencySwitcher extends PureComponent {
         super(props);
 
         this.state = {
-            displayMenu: false
+            displayMenu: false,
+            currencyList: []
         }
 
         this.switcherBtnId = "currency-btn";
@@ -47,6 +49,20 @@ class CurrencySwitcher extends PureComponent {
 
     handleArrowDegree = () => {
         return this.state.displayMenu ? "180deg" : "0deg";
+    }
+
+    queryCurrencyList = async () => {
+        const query = new Query("currencies", true)
+            .addFieldList(["label", "symbol"]);
+        const result = await client.post(query);
+
+        this.setState(() => {
+            return { currencyList: result.currencies }
+        })
+    }
+
+    componentDidMount = () => {
+        this.queryCurrencyList();
     }
 
     render(){
@@ -63,6 +79,7 @@ class CurrencySwitcher extends PureComponent {
                     <CurrencyMenu 
                         triggererId={this.switcherBtnId} 
                         trigger={this.handleMenuClick}
+                        currencies={this.state.currencyList}
                     /> 
                     : 
                     null}

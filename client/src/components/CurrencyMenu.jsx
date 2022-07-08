@@ -43,9 +43,15 @@ class CurrencyMenu extends PureComponent {
     render(){
         return(
             <Styles>
-                <div className="currency-option">$ USD</div>
-                <div className="currency-option">€ EUR</div>
-                <div className="currency-option">¥ JPY</div>
+                {this.props.currencies.map(
+                    (item, index) => 
+                        <div 
+                            key={index}
+                            className="currency-option"
+                        >
+                            {`${item.symbol} ${item.label}`}
+                        </div>
+                )}
             </Styles>
         )
     }
