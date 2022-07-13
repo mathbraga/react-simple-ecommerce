@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import ProductContainer from "../containers/ProductContainer";
 
 class Product extends PureComponent {
@@ -21,14 +22,22 @@ class Product extends PureComponent {
 
     render(){
         return(
-            <ProductContainer className={this.isInStock() ? "" : "no-stock"}>
-                <div className="product-image">
-                    {this.isInStock() ? null : <div className="no-stock-notice">OUT OF STOCK</div>}
-                    <img src={this.props.data.gallery[0]} alt="Product images" />
-                </div>
-                <div className="product-name">{`${this.props.data.brand} ${this.props.data.name}`}</div>
-                {this.returnSelectedCurrency()}
-            </ProductContainer>
+            <Link
+                style={{ 
+                    textDecoration: 'none', 
+                    color: 'inherit', 
+                    pointerEvents: this.isInStock() ? 'auto' : 'none' }}
+                to={`/${this.props.data.category}/${this.props.data.id}`}
+            >
+                <ProductContainer className={this.isInStock() ? "" : "no-stock"}>
+                        <div className="product-image">
+                            {this.isInStock() ? null : <div className="no-stock-notice">OUT OF STOCK</div>}
+                            <img src={this.props.data.gallery[0]} alt="Product images" />
+                        </div>
+                        <div className="product-name">{`${this.props.data.brand} ${this.props.data.name}`}</div>
+                        {this.returnSelectedCurrency()}
+                </ProductContainer>
+            </Link>
         )
     }
 }
