@@ -23,9 +23,22 @@ class ProductDescription extends PureComponent {
     }
 
     prepareQuery = () => {
+        const currencyFields = ['label', 'symbol'];
+        const currency = new Field('currency', true)
+            .addFieldList(currencyFields);
+        const pricesFields = [currency, 'amount']
+        const prices = new Field('prices', true)
+            .addFieldList(pricesFields)
+        const itemsFields = ['displayValue', 'value']
+        const items = new Field('items', true)
+            .addFieldList(itemsFields);
+        const attributesFields = ['name', 'type', items];
+        const attributes = new Field('attributes', true)
+            .addFieldList(attributesFields);
+        const productFields = ['name', 'inStock', 'gallery', 'description', attributes, prices, 'brand'];
         const query = new Query('product', true)
             .addArgument('id', 'String!', this.props.params.productId)
-            .addFieldList(['name', 'brand']);
+            .addFieldList(productFields);
 
         return query;
     }
