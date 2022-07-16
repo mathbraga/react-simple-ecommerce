@@ -70,7 +70,8 @@ class ProductDescription extends PureComponent {
                             </div>
                         </div>
                         <div className="section-description">
-                            {this.state.data.product.name}
+                            <div className="item-brand">{this.state.data.product.brand}</div>
+                            <div>{this.state.data.product.name}</div>
                         </div>
                     </ProductDescriptionContainer>
                     : null

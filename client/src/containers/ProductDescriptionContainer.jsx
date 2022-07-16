@@ -27,6 +27,16 @@ const ProductDescriptionContainer = styled.div`
             }
         }
     }
+
+    .section-description{
+        font-size: 30px;
+        font-weight: 400;
+
+        .item-brand{
+            font-size: 30px;
+            font-weight: 600;
+        }
+    }
 `;
 
 export default ProductDescriptionContainer;
