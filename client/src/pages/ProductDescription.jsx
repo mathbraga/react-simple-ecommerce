@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PageContainer from "../containers/PageContainer";
 import { useParams } from "react-router-dom";
 import { client, Query, Field } from "@tilework/opus";
+import ProductDescriptionContainer from "../containers/ProductDescriptionContainer";
 
 function withParams(Component){
     return props => <Component {...props} params={useParams()} />;
@@ -55,15 +56,26 @@ class ProductDescription extends PureComponent {
 
     render(){
         return(
-            <>
+            <PageContainer>
                 {this.state.data.product ?
-                    <PageContainer>
-                        <div>{this.state.data.product.brand}</div>
-                        <div>{this.state.data.product.name}</div>
-                    </PageContainer>
+                    <ProductDescriptionContainer>
+                        <div className="section-images">
+                            <div className="image-list">
+                                {this.state.data.product.gallery.slice(1).map(
+                                    (item, index) => <img key={index} src={item} alt={index} />
+                                )}
+                            </div>
+                            <div className="image-main">
+                                <img src={this.state.data.product.gallery[0]} alt="Main" />
+                            </div>
+                        </div>
+                        <div className="section-description">
+                            {this.state.data.product.name}
+                        </div>
+                    </ProductDescriptionContainer>
                     : null
                 }
-            </>
+            </PageContainer>
         );
     }
 }
