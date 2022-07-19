@@ -58,16 +58,17 @@ class ProductDescription extends PureComponent {
         return(
             <PageContainer>
                 {this.state.data.product ?
-                    <ProductDescriptionContainer>
-                        <div className="section-images">
+                    <ProductDescriptionContainer hasGallery={this.state.data.product.gallery.length > 1}>
+                        {this.state.data.product.gallery.length > 1 ?
                             <div className="image-list">
-                                {this.state.data.product.gallery.slice(1).map(
-                                    (item, index) => <img key={index} src={item} alt={index} />
+                                {this.state.data.product.gallery.map(
+                                    (item, index) => 
+                                        index ? <img key={index} src={item} alt={index} />
+                                        : null
                                 )}
-                            </div>
-                            <div className="image-main">
-                                <img src={this.state.data.product.gallery[0]} alt="Main" />
-                            </div>
+                            </div> : null}
+                        <div className="image-main">
+                            <img src={this.state.data.product.gallery[0]} alt="Main" />
                         </div>
                         <div className="section-description">
                             <div className="item-brand">{this.state.data.product.brand}</div>
