@@ -3,6 +3,8 @@ import PageContainer from "../containers/PageContainer";
 import { useParams } from "react-router-dom";
 import { client, Query, Field } from "@tilework/opus";
 import ProductDescriptionContainer from "../containers/ProductDescriptionContainer";
+import arrowUp from "../assets/icons/arrow-up.svg";
+import arrowDown from "../assets/icons/arrow-down.svg";
 
 function withParams(Component){
     return props => <Component {...props} params={useParams()} />;
@@ -13,13 +15,14 @@ class ProductDescription extends PureComponent {
         super(props);
 
         this.state = {
-            data: []
+            data: [],
+            selectedImage: 0
         }
     }
 
-    handleState = (newState) => {
+    updateProductData = (newData) => {
         this.setState(() => {
-            return {data: newState}
+            return { data: newData }
         });
     }
 
@@ -47,11 +50,52 @@ class ProductDescription extends PureComponent {
     queryProductData = async () => {
         const query = this.prepareQuery();
         const result = await client.post(query);
-        this.handleState(result);
+        this.updateProductData(result);
     }
 
     componentDidMount = () => {
         this.queryProductData();
+    }
+
+    handleImgSelect = (index) => {
+        this.setState(() => {
+            return { selectedImage: index }
+        })
+    }
+
+    handleImgListDisplay = (index) => {
+        const selectedImg = this.state.selectedImage;
+        const galleryLength = this.state.data.product.gallery.length;
+        const isFirstImg = selectedImg === 0;
+        const isLastImg = selectedImg === galleryLength-1;
+
+        if(isFirstImg){
+            return index <= 2;
+        }
+        else if(isLastImg){
+            return index >= selectedImg-2
+        }
+        else{
+            return index >= selectedImg-1 && index <= selectedImg+1;
+        }
+    }
+
+    handleClick = (direction) => {
+        const selectedImg = this.state.selectedImage;
+        const galleryLength = this.state.data.product.gallery.length;
+        const newIndex = selectedImg + direction;
+        const isNewIndexValid = newIndex < galleryLength && newIndex >= 0;
+        const finalDirection = isNewIndexValid ? newIndex : selectedImg;
+
+        this.setState(() => {
+            return { selectedImage: finalDirection }
+        });
+    }
+
+    handleArrowClass = (limit) => {
+        const selectedImg = this.state.selectedImage;
+
+        return selectedImg === limit ? "slider-arrow-disabled" : "slider-arrow";
     }
 
     render(){
@@ -60,15 +104,31 @@ class ProductDescription extends PureComponent {
                 {this.state.data.product ?
                     <ProductDescriptionContainer hasGallery={this.state.data.product.gallery.length > 1}>
                         {this.state.data.product.gallery.length > 1 ?
-                            <div className="image-list">
-                                {this.state.data.product.gallery.map(
-                                    (item, index) => 
-                                        index ? <img key={index} src={item} alt={index} />
-                                        : null
-                                )}
+                            <div>
+                                <div 
+                                    className={this.handleArrowClass(0)} 
+                                    onClick={() => this.handleClick(-1)}
+                                >
+                                    <img src={arrowUp} alt="Arrow up" />
+                                </div>
+                                <div className="image-list">
+                                    {this.state.data.product.gallery.map(
+                                        (item, index) =>
+                                            this.handleImgListDisplay(index) ?
+                                            <div key={index} onClick={() => this.handleImgSelect(index)}>
+                                                <img src={item} alt={index} />
+                                            </div> : null
+                                    )}
+                                </div>
+                                <div 
+                                    className={this.handleArrowClass(this.state.data.product.gallery.length-1)} 
+                                    onClick={() => this.handleClick(1)}
+                                >
+                                    <img src={arrowDown} alt="Arrow down" />
+                                </div>
                             </div> : null}
                         <div className="image-main">
-                            <img src={this.state.data.product.gallery[0]} alt="Main" />
+                            <img src={this.state.data.product.gallery[this.state.selectedImage]} alt="Main" />
                         </div>
                         <div className="section-description">
                             <div className="item-brand">{this.state.data.product.brand}</div>

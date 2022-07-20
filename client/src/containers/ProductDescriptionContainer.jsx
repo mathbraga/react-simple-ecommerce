@@ -20,12 +20,33 @@ const ProductDescriptionContainer = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 40px;
+        gap: 36px;
+
+        div{
+            cursor: pointer;
+        }
 
         img{
             height: 80px;
             width: fill;
         }
+    }
+
+    .slider-arrow{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+    }
+
+    .slider-arrow-disabled{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        pointer-events: none;
+        opacity: 0.2;
     }
 
     .section-description{
