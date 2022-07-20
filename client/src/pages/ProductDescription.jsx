@@ -16,7 +16,8 @@ class ProductDescription extends PureComponent {
 
         this.state = {
             data: [],
-            selectedImage: 0
+            selectedImage: 0,
+            carouselReference: 1
         }
     }
 
@@ -24,6 +25,12 @@ class ProductDescription extends PureComponent {
         this.setState(() => {
             return { data: newData }
         });
+    }
+
+    handleImgSelect = (index) => {
+        this.setState(() => {
+            return { selectedImage: index }
+        })
     }
 
     prepareQuery = () => {
@@ -57,45 +64,39 @@ class ProductDescription extends PureComponent {
         this.queryProductData();
     }
 
-    handleImgSelect = (index) => {
-        this.setState(() => {
-            return { selectedImage: index }
-        })
-    }
-
     handleImgListDisplay = (index) => {
-        const selectedImg = this.state.selectedImage;
         const galleryLength = this.state.data.product.gallery.length;
-        const isFirstImg = selectedImg === 0;
-        const isLastImg = selectedImg === galleryLength-1;
+        const isIndexInInterval = 
+            index <= this.state.carouselReference+1 && index >= this.state.carouselReference-1;
 
-        if(isFirstImg){
-            return index <= 2;
-        }
-        else if(isLastImg){
-            return index >= selectedImg-2
-        }
-        else{
-            return index >= selectedImg-1 && index <= selectedImg+1;
-        }
+        if(galleryLength <= 3)
+            return true;
+
+        return isIndexInInterval;
     }
 
-    handleClick = (direction) => {
-        const selectedImg = this.state.selectedImage;
+    handleClick = (offset) => {
         const galleryLength = this.state.data.product.gallery.length;
-        const newIndex = selectedImg + direction;
-        const isNewIndexValid = newIndex < galleryLength && newIndex >= 0;
-        const finalDirection = isNewIndexValid ? newIndex : selectedImg;
+        const currentReference = this.state.carouselReference;
+        const finalReference = 
+            currentReference + offset < 1 ? 
+            1 :
+            (currentReference + offset > galleryLength-2 ? 
+                galleryLength-2 : currentReference + offset);
 
         this.setState(() => {
-            return { selectedImage: finalDirection }
+            return { carouselReference: finalReference }
         });
     }
 
     handleArrowClass = (limit) => {
-        const selectedImg = this.state.selectedImage;
+        const galleryLength = this.state.data.product.gallery.length;
 
-        return selectedImg === limit ? "slider-arrow-disabled" : "slider-arrow";
+        if(galleryLength <= 3){
+            return "slider-arrow-disabled";
+        }
+
+        return this.state.carouselReference === limit ? "slider-arrow-disabled" : "slider-arrow";
     }
 
     render(){
@@ -106,7 +107,7 @@ class ProductDescription extends PureComponent {
                         {this.state.data.product.gallery.length > 1 ?
                             <div>
                                 <div 
-                                    className={this.handleArrowClass(0)} 
+                                    className={this.handleArrowClass(1)} 
                                     onClick={() => this.handleClick(-1)}
                                 >
                                     <img src={arrowUp} alt="Arrow up" />
@@ -121,7 +122,7 @@ class ProductDescription extends PureComponent {
                                     )}
                                 </div>
                                 <div 
-                                    className={this.handleArrowClass(this.state.data.product.gallery.length-1)} 
+                                    className={this.handleArrowClass(this.state.data.product.gallery.length-2)} 
                                     onClick={() => this.handleClick(1)}
                                 >
                                     <img src={arrowDown} alt="Arrow down" />
