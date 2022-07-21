@@ -3,8 +3,7 @@ import PageContainer from "../containers/PageContainer";
 import { useParams } from "react-router-dom";
 import { client, Query, Field } from "@tilework/opus";
 import ProductDescriptionContainer from "../containers/ProductDescriptionContainer";
-import arrowUp from "../assets/icons/arrow-up.svg";
-import arrowDown from "../assets/icons/arrow-down.svg";
+import ImageSlider from "../components/ImageSlider";
 
 function withParams(Component){
     return props => <Component {...props} params={useParams()} />;
@@ -16,8 +15,7 @@ class ProductDescription extends PureComponent {
 
         this.state = {
             data: [],
-            selectedImage: 0,
-            carouselReference: 1
+            selectedImage: 0
         }
     }
 
@@ -64,70 +62,12 @@ class ProductDescription extends PureComponent {
         this.queryProductData();
     }
 
-    handleImgListDisplay = (index) => {
-        const galleryLength = this.state.data.product.gallery.length;
-        const isIndexInInterval = 
-            index <= this.state.carouselReference+1 && index >= this.state.carouselReference-1;
-
-        if(galleryLength <= 3)
-            return true;
-
-        return isIndexInInterval;
-    }
-
-    handleClick = (offset) => {
-        const galleryLength = this.state.data.product.gallery.length;
-        const currentReference = this.state.carouselReference;
-        const finalReference = 
-            currentReference + offset < 1 ? 
-            1 :
-            (currentReference + offset > galleryLength-2 ? 
-                galleryLength-2 : currentReference + offset);
-
-        this.setState(() => {
-            return { carouselReference: finalReference }
-        });
-    }
-
-    handleArrowClass = (limit) => {
-        const galleryLength = this.state.data.product.gallery.length;
-
-        if(galleryLength <= 3){
-            return "slider-arrow-disabled";
-        }
-
-        return this.state.carouselReference === limit ? "slider-arrow-disabled" : "slider-arrow";
-    }
-
     render(){
         return(
             <PageContainer>
                 {this.state.data.product ?
                     <ProductDescriptionContainer hasGallery={this.state.data.product.gallery.length > 1}>
-                        {this.state.data.product.gallery.length > 1 ?
-                            <div>
-                                <div 
-                                    className={this.handleArrowClass(1)} 
-                                    onClick={() => this.handleClick(-1)}
-                                >
-                                    <img src={arrowUp} alt="Arrow up" />
-                                </div>
-                                <div className="image-list">
-                                    {this.state.data.product.gallery.map(
-                                        (item, index) =>
-                                            this.handleImgListDisplay(index) ?
-                                            <div key={index} onClick={() => this.handleImgSelect(index)}>
-                                                <img src={item} alt={index} />
-                                            </div> : null
-                                    )}
-                                </div>
-                                <div 
-                                    className={this.handleArrowClass(this.state.data.product.gallery.length-2)} 
-                                    onClick={() => this.handleClick(1)}
-                                >
-                                    <img src={arrowDown} alt="Arrow down" />
-                                </div>
-                            </div> : null}
+                        <ImageSlider images={this.state.data.product.gallery} imageSelector={this.handleImgSelect} />
                         <div className="image-main">
                             <img src={this.state.data.product.gallery[this.state.selectedImage]} alt="Main" />
                         </div>

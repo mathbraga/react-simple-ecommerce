@@ -15,23 +15,6 @@ const ProductDescriptionContainer = styled.div`
         }
     }
 
-    .image-list{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 36px;
-
-        div{
-            cursor: pointer;
-        }
-
-        img{
-            height: 80px;
-            width: fill;
-        }
-    }
-
     .slider-arrow{
         display: flex;
         justify-content: center;
