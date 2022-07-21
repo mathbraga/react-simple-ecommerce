@@ -2,6 +2,26 @@ import React, { PureComponent } from "react";
 import arrowUp from "../assets/icons/arrow-up.svg";
 import arrowDown from "../assets/icons/arrow-down.svg";
 import ImageList from "./ImageList";
+import styled from "styled-components";
+
+const ImageSliderStyles = styled.div`
+    .slider-arrow{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+    }
+
+    .slider-arrow-disabled{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        pointer-events: none;
+        opacity: 0.2;
+    }
+`;
 
 class ImageSlider extends PureComponent {
     constructor(props){
@@ -39,7 +59,7 @@ class ImageSlider extends PureComponent {
     render(){
         return(
             this.props.images.length > 1 ?
-                <div>
+                <ImageSliderStyles>
                     <div 
                         className={this.handleArrowClass(1)} 
                         onClick={() => this.handleClick(-1)}
@@ -57,7 +77,7 @@ class ImageSlider extends PureComponent {
                     >
                         <img src={arrowDown} alt="Arrow down" />
                     </div>
-                </div> : null
+                </ImageSliderStyles> : null
         );
     }
 }

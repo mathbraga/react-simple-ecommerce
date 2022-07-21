@@ -6,32 +6,6 @@ const ProductDescriptionContainer = styled.div`
     grid-template-columns: ${props => props.hasGallery ? "1fr 5fr 2fr" : "3fr 1fr"};
     justify-items: start;
 
-    .image-main{
-        justify-self: center;
-
-        img{
-            height: 511px;
-            width: fill;
-        }
-    }
-
-    .slider-arrow{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        cursor: pointer;
-    }
-
-    .slider-arrow-disabled{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        pointer-events: none;
-        opacity: 0.2;
-    }
-
     .section-description{
         font-size: 1.875rem;
         font-weight: 400;
