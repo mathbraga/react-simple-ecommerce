@@ -5,6 +5,7 @@ import { client, Query, Field } from "@tilework/opus";
 import ProductDescriptionContainer from "../containers/ProductDescriptionContainer";
 import ImageSlider from "../components/ImageSlider";
 import MainImage from "../components/MainImage";
+import ProductDetails from "../components/ProductDetails";
 
 function withParams(Component){
     return props => <Component {...props} params={useParams()} />;
@@ -64,16 +65,20 @@ class ProductDescription extends PureComponent {
     }
 
     render(){
+        const productDetails = 
+            this.state.data.product ? 
+            {
+                brand: this.state.data.product.brand,
+                name: this.state.data.product.name
+            } : {}
+
         return(
             <PageContainer>
                 {this.state.data.product ?
                     <ProductDescriptionContainer hasGallery={this.state.data.product.gallery.length > 1}>
                         <ImageSlider images={this.state.data.product.gallery} imageSelector={this.handleImgSelect} />
                         <MainImage image={this.state.data.product.gallery[this.state.selectedImage]} />
-                        <div className="section-description">
-                            <div className="item-brand">{this.state.data.product.brand}</div>
-                            <div>{this.state.data.product.name}</div>
-                        </div>
+                        <ProductDetails {...productDetails} />
                     </ProductDescriptionContainer>
                     : null
                 }
