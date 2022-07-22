@@ -69,7 +69,8 @@ class ProductDescription extends PureComponent {
             this.state.data.product ? 
             {
                 brand: this.state.data.product.brand,
-                name: this.state.data.product.name
+                name: this.state.data.product.name,
+                description: this.state.data.product.description
             } : {}
 
         return(
