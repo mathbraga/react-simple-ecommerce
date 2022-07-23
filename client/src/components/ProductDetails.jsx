@@ -18,12 +18,16 @@ const ProductDetailsStyles = styled.div`
 `;
 
 class ProductDetails extends PureComponent{
+    setHTML = () => {
+        return {__html: this.props.description}
+    }
+
     render(){
         return(
             <ProductDetailsStyles>
                 <div className="product-brand">{this.props.brand}</div>
                 <div>{this.props.name}</div>
-                <div className="description">{this.props.description}</div>
+                <div className="description" dangerouslySetInnerHTML={this.setHTML()}/>
             </ProductDetailsStyles>
         )
     }
