@@ -3,11 +3,9 @@ import PageContainer from "../containers/PageContainer";
 import { useParams } from "react-router-dom";
 import { client, Query, Field } from "@tilework/opus";
 import ProductDescriptionContainer from "../containers/ProductDescriptionContainer";
-import ImageSlider from "../components/ImageSlider";
 import MainImage from "../components/MainImage";
 import ProductDetails from "../components/ProductDetails";
-import arrowUp from "../assets/icons/arrow-up.svg";
-import arrowDown from "../assets/icons/arrow-down.svg";
+import ImageSelector from "../components/ImageSelector";
 
 function withParams(Component){
     return props => <Component {...props} params={useParams()} />;
@@ -19,8 +17,7 @@ class ProductDescription extends PureComponent {
 
         this.state = {
             data: [],
-            selectedImage: 0,
-            slideLimiter: 0
+            selectedImage: 0
         }
     }
 
@@ -67,20 +64,6 @@ class ProductDescription extends PureComponent {
         this.queryProductData();
     }
 
-    handleArrowClass = (limit) => {
-        if(this.state.slideLimiter === limit){
-            return "slider-arrow-disabled";
-        }
-
-        return "slider-arrow";
-    };
-
-    handleClick = (offset) => {
-        this.setState((state) => {
-            return { slideLimiter: state.slideLimiter + offset }
-        })
-    }
-
     render(){
         const productDetails = 
             this.state.data.product ? 
@@ -95,27 +78,10 @@ class ProductDescription extends PureComponent {
                 {this.state.data.product ?
                     <ProductDescriptionContainer hasGallery={this.state.data.product.gallery.length > 1}>
                         {this.state.data.product.gallery.length > 1 ?
-                        <div>
-                            {this.state.data.product.gallery.length > 3 ?
-                            <div 
-                                className={this.handleArrowClass(0)} 
-                                onClick={() => this.handleClick(-1)}
-                            >
-                                <img src={arrowUp} alt="Arrow up" />
-                            </div> : null}
-                            <ImageSlider 
-                                offset={this.state.slideLimiter} 
-                                images={this.state.data.product.gallery} 
-                                imageSelector={this.handleImgSelect} 
-                            />
-                            {this.state.data.product.gallery.length > 3 ?
-                            <div 
-                                className={this.handleArrowClass(this.state.data.product.gallery.length - 3)}
-                                onClick={() => this.handleClick(1)}
-                            >
-                                <img src={arrowDown} alt="Arrow down" />
-                            </div> : null}
-                        </div> : null}
+                        <ImageSelector 
+                            gallery={this.state.data.product.gallery}
+                            imageSelector={this.handleImgSelect}
+                        /> : null}
                         <MainImage image={this.state.data.product.gallery[this.state.selectedImage]} />
                         <ProductDetails {...productDetails} />
                     </ProductDescriptionContainer>
