@@ -35,6 +35,12 @@ const ProductDetailsStyles = styled.div`
 
         cursor: pointer;
     }
+
+    .price-title{
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 700;
+    }
 `;
 
 class ProductDetails extends PureComponent{
@@ -49,6 +55,7 @@ class ProductDetails extends PureComponent{
                     <div className="product-brand">{this.props.brand}</div>
                     <div>{this.props.name}</div>
                 </div>
+                <div className="price-title">PRICE:</div>
                 <button className="btn-cart">ADD TO CART</button>
                 <div className="description" dangerouslySetInnerHTML={this.setHTML()}/>
             </ProductDetailsStyles>

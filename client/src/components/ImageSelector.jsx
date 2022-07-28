@@ -47,9 +47,11 @@ class ImageSelector extends PureComponent {
     }
 
     render(){
+        const isArrowVisible = this.props.gallery.length > 3;
+
         return(
             <Styles>
-                {this.props.gallery.length > 3 ?
+                {isArrowVisible ?
                 <div 
                     className={this.handleArrowClass(0)} 
                     onClick={() => this.handleArrowClick(-1)}
@@ -61,7 +63,7 @@ class ImageSelector extends PureComponent {
                     images={this.props.gallery}
                     imageSelector={this.props.imageSelector} 
                 />
-                {this.props.gallery.length > 3 ?
+                {isArrowVisible ?
                 <div 
                     className={this.handleArrowClass(this.props.gallery.length - 3)}
                     onClick={() => this.handleArrowClick(1)}
