@@ -8,6 +8,7 @@ const Styles = styled.div`
     height: auto;
     padding: 10px 0;
 
+    background-color: white;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
 
     cursor: default;

@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-const ProductDetailsStyles = styled.div`
+const Styles = styled.div`
     font-size: 1.875rem;
     font-weight: 400;
     justify-self: stretch;
@@ -41,6 +42,11 @@ const ProductDetailsStyles = styled.div`
         font-size: 1.125rem;
         font-weight: 700;
     }
+
+    .price-value{
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
 `;
 
 class ProductDetails extends PureComponent{
@@ -48,19 +54,36 @@ class ProductDetails extends PureComponent{
         return {__html: this.props.description}
     }
 
+    returnSelectedCurrency = () => {
+        const price = this.props.prices.filter(
+            item => item.currency.symbol === this.props.defaultCurrency
+        );
+
+        return `${price[0].currency.symbol} ${price[0].amount}`;
+    }
+
     render(){
+        const price = this.returnSelectedCurrency();
+
         return(
-            <ProductDetailsStyles>
+            <Styles>
                 <div>
                     <div className="product-brand">{this.props.brand}</div>
                     <div>{this.props.name}</div>
                 </div>
+                <div>
                 <div className="price-title">PRICE:</div>
+                <div className="price-value">{price}</div>
+                </div>
                 <button className="btn-cart">ADD TO CART</button>
                 <div className="description" dangerouslySetInnerHTML={this.setHTML()}/>
-            </ProductDetailsStyles>
+            </Styles>
         )
     }
 }
 
-export default ProductDetails;
+const mapStateToProps = (state) => ({
+    defaultCurrency: state.currency.defaultCurrency
+})
+
+export default connect(mapStateToProps)(ProductDetails);
