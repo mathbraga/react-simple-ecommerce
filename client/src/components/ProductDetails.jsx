@@ -50,11 +50,20 @@ const Styles = styled.div`
 
     .attribute-options{
         display: flex;
+        gap: 8px;
 
         div{
             font-family: 'Source Sans Pro', sans-serif;
             font-weight: 400;
             font-size: 1rem;
+
+            border: 1px solid black;
+            width: 63px;
+            height: 45px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 `;
