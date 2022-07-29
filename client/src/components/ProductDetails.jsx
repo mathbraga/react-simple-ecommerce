@@ -37,7 +37,7 @@ const Styles = styled.div`
         cursor: pointer;
     }
 
-    .price-title{
+    .fragment-title{
         font-family: 'Roboto Condensed', sans-serif;
         font-size: 1.125rem;
         font-weight: 700;
@@ -46,6 +46,16 @@ const Styles = styled.div`
     .price-value{
         font-weight: 700;
         font-size: 1.5rem;
+    }
+
+    .attribute-options{
+        display: flex;
+
+        div{
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+        }
     }
 `;
 
@@ -64,6 +74,7 @@ class ProductDetails extends PureComponent{
 
     render(){
         const price = this.returnSelectedCurrency();
+        console.log(this.props.attributes);
 
         return(
             <Styles>
@@ -71,9 +82,19 @@ class ProductDetails extends PureComponent{
                     <div className="product-brand">{this.props.brand}</div>
                     <div>{this.props.name}</div>
                 </div>
+                {this.props.attributes.map(
+                    (item, index) => 
+                        <div key={index}>
+                            <div className="fragment-title" >{`${item.name}:`}</div>
+                            <div className="attribute-options">
+                                {item.items.map(
+                                    (item, index) => <div key={index}>{item.value}</div>)}
+                            </div>
+                        </div>
+                )}
                 <div>
-                <div className="price-title">PRICE:</div>
-                <div className="price-value">{price}</div>
+                    <div className="fragment-title">PRICE:</div>
+                    <div className="price-value">{price}</div>
                 </div>
                 <button className="btn-cart">ADD TO CART</button>
                 <div className="description" dangerouslySetInnerHTML={this.setHTML()}/>
