@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import Attributes from "./Attribute";
 
 const Styles = styled.div`
     font-size: 1.875rem;
@@ -47,25 +48,6 @@ const Styles = styled.div`
         font-weight: 700;
         font-size: 1.5rem;
     }
-
-    .attribute-options{
-        display: flex;
-        gap: 8px;
-
-        div{
-            font-family: 'Source Sans Pro', sans-serif;
-            font-weight: 400;
-            font-size: 1rem;
-
-            border: 1px solid black;
-            width: 63px;
-            height: 45px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
 `;
 
 class ProductDetails extends PureComponent{
@@ -83,7 +65,6 @@ class ProductDetails extends PureComponent{
 
     render(){
         const price = this.returnSelectedCurrency();
-        console.log(this.props.attributes);
 
         return(
             <Styles>
@@ -93,13 +74,7 @@ class ProductDetails extends PureComponent{
                 </div>
                 {this.props.attributes.map(
                     (item, index) => 
-                        <div key={index}>
-                            <div className="fragment-title" >{`${item.name}:`}</div>
-                            <div className="attribute-options">
-                                {item.items.map(
-                                    (item, index) => <div key={index}>{item.value}</div>)}
-                            </div>
-                        </div>
+                        <Attributes attribute={item} key={index} />
                 )}
                 <div>
                     <div className="fragment-title">PRICE:</div>
