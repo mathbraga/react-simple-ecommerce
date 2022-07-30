@@ -2,6 +2,8 @@
   --color-black: #1D1F22;
   --color-grey: #8D8F9A;
   --color-smooth-green: #5ECE7B;
+
+  box-sizing: border-box;
 }
 
 body {

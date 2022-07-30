@@ -29,10 +29,30 @@ const Styles = styled.div`
             cursor: pointer;
         }
 
-        .selected{
+        .attribute-selected{
             color: white;
             background-color: var(--color-black);
         }
+    }
+
+    .swatch{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+`;
+
+const SwatchType = styled.div`
+    width: 32px;
+    height: 32px;
+
+    background-color: ${props => props.color};
+    cursor: pointer;
+
+    &.attribute-selected{
+        border: 1px solid #5ECE7B;
+        width: 36px;
+        height: 36px;
     }
 `;
 
@@ -46,7 +66,7 @@ class Attribute extends PureComponent{
     }
 
     handleSelectedAttribute = (index) => {
-        return index === this.state.selected ? "selected" : "";
+        return index === this.state.selected ? "attribute-selected" : "";
     }
 
     selectAttribute = (index) => {
@@ -56,12 +76,26 @@ class Attribute extends PureComponent{
     }
 
     render(){
+        const {
+            name,
+            items,
+            type
+        } = this.props.attribute;
+        const isSwatch = type === "swatch";
+
         return(
             <Styles>
-                <div className="attribute-title">{`${this.props.attribute.name}:`}</div>
-                <div className="attribute-options">
-                    {this.props.attribute.items.map(
+                <div className="attribute-title">{`${name}:`}</div>
+                <div className={isSwatch ? "swatch" : "attribute-options"}>
+                    {items.map(
                         (item, index) => 
+                            isSwatch ?
+                            <SwatchType 
+                                color={item.value} 
+                                key={index}
+                                className={this.handleSelectedAttribute(index)}
+                                onClick={() => this.selectAttribute(index)}
+                            /> :
                             <div 
                                 key={index}
                                 className={this.handleSelectedAttribute(index)}
