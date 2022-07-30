@@ -43,16 +43,24 @@ const Styles = styled.div`
 `;
 
 const SwatchType = styled.div`
-    width: 32px;
-    height: 32px;
-
-    background-color: ${props => props.color};
-    cursor: pointer;
-
-    &.attribute-selected{
+    &.swatch-selected{
+        padding: 1px;
         border: 1px solid #5ECE7B;
-        width: 36px;
-        height: 36px;
+    }
+
+    div{
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--color-black);
+
+        background-color: ${props => props.color};
+        cursor: pointer;
+
+        &.color-selected{
+            width: 35px;
+            height: 35px;
+            border: none;
+        }
     }
 `;
 
@@ -65,8 +73,8 @@ class Attribute extends PureComponent{
         }
     }
 
-    handleSelectedAttribute = (index) => {
-        return index === this.state.selected ? "attribute-selected" : "";
+    isSelectedAttribute = (index) => {
+        return index === this.state.selected;
     }
 
     selectAttribute = (index) => {
@@ -93,12 +101,16 @@ class Attribute extends PureComponent{
                             <SwatchType 
                                 color={item.value} 
                                 key={index}
-                                className={this.handleSelectedAttribute(index)}
+                                className={this.isSelectedAttribute(index) ? "swatch-selected" : ""}
                                 onClick={() => this.selectAttribute(index)}
-                            /> :
+                            >
+                                <div 
+                                    className={this.isSelectedAttribute(index) ? "color-selected" : ""} 
+                                />
+                            </SwatchType> :
                             <div 
                                 key={index}
-                                className={this.handleSelectedAttribute(index)}
+                                className={this.isSelectedAttribute(index) ? "attribute-selected" : ""}
                                 onClick={() => this.selectAttribute(index)}
                             >
                                 {item.value}
