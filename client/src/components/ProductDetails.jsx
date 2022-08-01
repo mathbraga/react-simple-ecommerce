@@ -74,13 +74,13 @@ class ProductDetails extends PureComponent{
 
     returnAttributesObject = () => {
         // builds {key: value} pair where {attribute: first attribute value}
-        const attributesObj = {
+        const attributesObj = this.props.attributes.length > 0 ? {
             ...Object.assign(
                 ...this.props.attributes.map(
                     item => ({[item.name]: item.items[0].value})
                 )
             )
-        };
+        } : null;
 
         return attributesObj;
     }
