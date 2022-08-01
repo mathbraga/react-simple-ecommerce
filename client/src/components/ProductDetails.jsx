@@ -6,6 +6,7 @@ import Attributes from "./Attribute";
 const Styles = styled.div`
     font-size: 1.875rem;
     font-weight: 400;
+    color: var(--color-black);
     justify-self: stretch;
 
     display: flex;
@@ -51,6 +52,14 @@ const Styles = styled.div`
 `;
 
 class ProductDetails extends PureComponent{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            ...this.returnAttributesObject()
+        }
+    }
+
     setHTML = () => {
         return {__html: this.props.description}
     }
@@ -61,6 +70,25 @@ class ProductDetails extends PureComponent{
         );
 
         return `${price[0].currency.symbol} ${price[0].amount}`;
+    }
+
+    returnAttributesObject = () => {
+        // builds {key: value} pair where {attribute: first attribute value}
+        const attributesObj = {
+            ...Object.assign(
+                ...this.props.attributes.map(
+                    item => ({[item.name]: item.items[0].value})
+                )
+            )
+        };
+
+        return attributesObj;
+    }
+
+    handleAttributeSelect = (attributeName, attributeValue) => {
+        this.setState(() => ({
+            [attributeName]: attributeValue
+        }));
     }
 
     render(){
@@ -74,7 +102,7 @@ class ProductDetails extends PureComponent{
                 </div>
                 {this.props.attributes.map(
                     (item, index) => 
-                        <Attributes attribute={item} key={index} />
+                        <Attributes attribute={item} key={index} onClick={this.handleAttributeSelect}/>
                 )}
                 <div>
                     <div className="fragment-title">PRICE:</div>

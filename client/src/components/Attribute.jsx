@@ -77,10 +77,14 @@ class Attribute extends PureComponent{
         return index === this.state.selected;
     }
 
-    selectAttribute = (index) => {
+    selectAttribute = (index, value) => {
+        const { name } = this.props.attribute;
+
         this.setState(() => {
             return {selected: index}
         });
+
+        this.props.onClick(name, value);
     }
 
     render(){
@@ -102,7 +106,7 @@ class Attribute extends PureComponent{
                                 color={item.value} 
                                 key={index}
                                 className={this.isSelectedAttribute(index) ? "swatch-selected" : ""}
-                                onClick={() => this.selectAttribute(index)}
+                                onClick={() => this.selectAttribute(index, item.value)}
                             >
                                 <div 
                                     className={this.isSelectedAttribute(index) ? "color-selected" : ""} 
@@ -111,7 +115,7 @@ class Attribute extends PureComponent{
                             <div 
                                 key={index}
                                 className={this.isSelectedAttribute(index) ? "attribute-selected" : ""}
-                                onClick={() => this.selectAttribute(index)}
+                                onClick={() => this.selectAttribute(index, item.value)}
                             >
                                 {item.value}
                             </div>
