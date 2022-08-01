@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { addItemToCart } from "../store/reducers/cartSlice";
 import Attributes from "./Attribute";
 
 const Styles = styled.div`
@@ -91,6 +92,28 @@ class ProductDetails extends PureComponent{
         }));
     }
 
+    handleCartClick = () => {
+        const { 
+            id,
+            brand,
+            name,
+            prices,
+            gallery,
+            attributes 
+        } = this.props;
+        const newItem = {
+            id,
+            brand,
+            name,
+            prices,
+            gallery,
+            attributes,
+            selectedAttributes: {...this.state}
+        }
+
+        this.props.addToCart(newItem);
+    }
+
     render(){
         const price = this.returnSelectedCurrency();
 
@@ -108,7 +131,7 @@ class ProductDetails extends PureComponent{
                     <div className="fragment-title">PRICE:</div>
                     <div className="price-value">{price}</div>
                 </div>
-                <button className="btn-cart">ADD TO CART</button>
+                <button className="btn-cart" onClick={this.handleCartClick}>ADD TO CART</button>
                 <div className="description" dangerouslySetInnerHTML={this.setHTML()}/>
             </Styles>
         )
@@ -117,6 +140,10 @@ class ProductDetails extends PureComponent{
 
 const mapStateToProps = (state) => ({
     defaultCurrency: state.currency.defaultCurrency
-})
+});
 
-export default connect(mapStateToProps)(ProductDetails);
+const mapDispatchToProps = (dispatch) => ({
+    addToCart: (newItem) => dispatch(addItemToCart(newItem))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

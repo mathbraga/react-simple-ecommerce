@@ -68,11 +68,13 @@ class ProductDescription extends PureComponent {
         const productDetails = 
             this.state.data.product ? 
             {
+                id: this.props.params.productId,
                 brand: this.state.data.product.brand,
                 name: this.state.data.product.name,
                 description: this.state.data.product.description,
                 prices: this.state.data.product.prices,
-                attributes: this.state.data.product.attributes
+                attributes: this.state.data.product.attributes,
+                gallery: this.state.data.product.gallery
             } : {}
 
         return(
