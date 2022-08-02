@@ -15,19 +15,18 @@ const Styles = styled.div`
 
 class Cart extends PureComponent {
     render(){
-        const numberOfItems = this.props.cartItems.length;
-
         return(
             <Styles>
                 <img src={cartIcon} alt="Cart" />
-                <div>{numberOfItems}</div>
+                <div>{this.props.cartAmount}</div>
             </Styles>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    cartItems: state.cart.cartItems
+    cartItems: state.cart.cartItems,
+    cartAmount: state.cart.cartAmount
 })
 
 export default connect(mapStateToProps)(Cart);
