@@ -1,21 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import hasExactAttributes from "../../utils/hasExactAttributes";
 
 const initialState = {
     cartItems: localStorage.cartItems ?  JSON.parse(localStorage.cartItems) : {cartAmount: 0},
 };
-
-const findEqual = (currentItem, newItem) => {
-    const attributes = Object.keys(newItem.selectedAttributes);
-    const isAttributeEqual = attributes.every(
-        attribute => {
-            const current = currentItem.selectedAttributes[attribute];
-            const newAttr = newItem.selectedAttributes[attribute];
-            
-            return current === newAttr;
-    })
-
-    return isAttributeEqual;
-}
 
 export const cartSlice = createSlice({
     name: "cart",
@@ -43,7 +31,7 @@ export const cartSlice = createSlice({
 
                 state.cartItems[action.payload.id].some(
                     item => {
-                        isExactProduct = findEqual(item, action.payload);
+                        isExactProduct = hasExactAttributes(item, action.payload);
 
                         if(isExactProduct)
                             item.amount++;
