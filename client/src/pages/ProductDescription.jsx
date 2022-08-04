@@ -6,10 +6,26 @@ import ProductDescriptionContainer from "../containers/ProductDescriptionContain
 import MainImage from "../components/MainImage";
 import ProductDetails from "../components/ProductDetails";
 import ImageSelector from "../components/ImageSelector";
+import styled from "styled-components";
 
 function withParams(Component){
     return props => <Component {...props} params={useParams()} />;
 }
+
+const OutOfStock = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    div{
+        font-size: 1rem;
+        font-weight: normal;
+    }
+`;
 
 class ProductDescription extends PureComponent {
     constructor(props){
@@ -80,6 +96,8 @@ class ProductDescription extends PureComponent {
         return(
             <PageContainer>
                 {this.state.data.product ?
+                    (
+                    this.state.data.product.inStock ?
                     <ProductDescriptionContainer hasGallery={this.state.data.product.gallery.length > 1}>
                         {this.state.data.product.gallery.length > 1 ?
                         <ImageSelector 
@@ -89,6 +107,11 @@ class ProductDescription extends PureComponent {
                         <MainImage image={this.state.data.product.gallery[this.state.selectedImage]} />
                         <ProductDetails {...productDetails} />
                     </ProductDescriptionContainer>
+                    :   <OutOfStock>
+                            Sorry, this product is out of stock.
+                            <div>Please go back to the home page.</div>
+                        </OutOfStock>
+                    )
                     : null
                 }
             </PageContainer>
