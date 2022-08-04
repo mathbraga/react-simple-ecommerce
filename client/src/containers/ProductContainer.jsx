@@ -36,7 +36,7 @@ const ProductContainer = styled.div`
 
         img{
             width: fill;
-            height: 330px;
+            height: 320px;
         }
     }
 
@@ -52,8 +52,16 @@ const ProductContainer = styled.div`
         padding: 4px 0;
     }
 
+    .cart-btn{
+        display: none;
+    }
+
     &:hover{
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
+
+        .cart-btn{
+            display: flex;
+        }
     }
 `;
 

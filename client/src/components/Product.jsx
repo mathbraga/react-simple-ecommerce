@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductContainer from "../containers/ProductContainer";
+import AddToCartBadge from "./AddToCartBadge";
 
 class Product extends PureComponent {
     isInStock = () => {
@@ -33,6 +34,7 @@ class Product extends PureComponent {
                         <div className="product-image">
                             {this.isInStock() ? null : <div className="no-stock-notice">OUT OF STOCK</div>}
                             <img src={this.props.data.gallery[0]} alt="Product images" />
+                            {this.props.data.attributes.length ? null : <AddToCartBadge className="cart-btn" />}
                         </div>
                         <div className="product-name">{`${this.props.data.brand} ${this.props.data.name}`}</div>
                         {this.returnSelectedCurrency()}
