@@ -24,7 +24,6 @@ class Product extends PureComponent {
 
     handleCartClick = (event) => {
         event.preventDefault();
-        event.stopPropagation();
 
         const { 
             id,

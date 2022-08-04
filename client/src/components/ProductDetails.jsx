@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { addItemToCart } from "../store/reducers/cartSlice";
 import Attributes from "./Attribute";
+import ProductTitle from "./ProductTitle";
 
 const Styles = styled.div`
     font-size: 1.875rem;
@@ -15,11 +16,6 @@ const Styles = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     gap: 20px;
-
-    .product-brand{
-        font-size: 1.875rem;
-        font-weight: 600;
-    }
 
     .description{
         font-family: 'Roboto', sans-serif;
@@ -126,8 +122,12 @@ class ProductDetails extends PureComponent{
         return(
             <Styles>
                 <div>
-                    <div className="product-brand">{this.props.brand}</div>
-                    <div>{this.props.name}</div>
+                    <ProductTitle size="1.875rem" weight="600">
+                        {this.props.brand}
+                    </ProductTitle>
+                    <ProductTitle>
+                        {this.props.name}
+                    </ProductTitle>
                 </div>
                 {this.props.attributes.map(
                     (item, index) => 
