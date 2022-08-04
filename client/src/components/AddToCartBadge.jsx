@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
 import cardCartIcon from "../assets/icons/card-cart.svg";
 
@@ -28,7 +27,7 @@ const Styles = styled.div`
 class AddToCartBadge extends PureComponent {
     render(){
         return(
-            <Styles className={this.props.className}>
+            <Styles className={this.props.className} onClick={this.props.onClick}>
                 <img src={cardCartIcon} alt="Add to cart" />
             </Styles>
         )

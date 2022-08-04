@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductContainer from "../containers/ProductContainer";
 import AddToCartBadge from "./AddToCartBadge";
+import { addItemToCart } from "../store/reducers/cartSlice";
 
 class Product extends PureComponent {
     isInStock = () => {
@@ -21,6 +22,31 @@ class Product extends PureComponent {
         )
     }
 
+    handleCartClick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const { 
+            id,
+            brand,
+            name,
+            prices,
+            gallery,
+            attributes 
+        } = this.props.data;
+        const newItem = {
+            id,
+            brand,
+            name,
+            prices,
+            gallery,
+            attributes,
+            selectedAttributes: {}
+        }
+
+        this.props.addToCart(newItem);
+    }
+
     render(){
         return(
             <Link
@@ -33,8 +59,9 @@ class Product extends PureComponent {
                 <ProductContainer className={this.isInStock() ? "" : "no-stock"}>
                         <div className="product-image">
                             {this.isInStock() ? null : <div className="no-stock-notice">OUT OF STOCK</div>}
-                            <img src={this.props.data.gallery[0]} alt="Product images" />
-                            {this.props.data.attributes.length ? null : <AddToCartBadge className="cart-btn" />}
+                            <img className="image-box" src={this.props.data.gallery[0]} alt="Product images" />
+                            {this.props.data.attributes.length ? 
+                                null : <AddToCartBadge className="cart-btn" onClick={this.handleCartClick} />}
                         </div>
                         <div className="product-name">{`${this.props.data.brand} ${this.props.data.name}`}</div>
                         {this.returnSelectedCurrency()}
@@ -48,4 +75,8 @@ const mapStateToProps = (state) => ({
     defaultCurrency: state.currency.defaultCurrency
 })
 
-export default connect(mapStateToProps)(Product);
+const mapDispatchToProps = (dispatch) => ({
+    addToCart: (newItem) => dispatch(addItemToCart(newItem))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

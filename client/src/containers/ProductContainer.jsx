@@ -34,7 +34,7 @@ const ProductContainer = styled.div`
             color: var(--color-grey);
         }
 
-        img{
+        .image-box{
             width: fill;
             height: 320px;
         }
