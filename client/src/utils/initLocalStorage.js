@@ -3,7 +3,7 @@ const initLocalStorage = () => {
         localStorage.setItem("currency", "$");
     }
     if(!localStorage.getItem("cartItems")){
-        localStorage.setItem("cartItems", "[]");
+        localStorage.setItem("cartItems", JSON.stringify({cartAmount: 0}));
     }
 }
 

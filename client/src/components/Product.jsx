@@ -40,7 +40,8 @@ class Product extends PureComponent {
             prices,
             gallery,
             attributes,
-            selectedAttributes: {}
+            selectedAttributes: {},
+            amount: 1
         }
 
         this.props.addToCart(newItem);

@@ -25,8 +25,7 @@ class Cart extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    cartItems: state.cart.cartItems,
-    cartAmount: state.cart.cartAmount
+    cartAmount: state.cart.cartItems.cartAmount
 })
 
 export default connect(mapStateToProps)(Cart);

@@ -70,17 +70,11 @@ class ProductDetails extends PureComponent{
     }
 
     returnAttributesObject = () => {
-        // builds {key: value} pair where {attribute: [1,0,0,0]}
-        // Array acts as a bitmap that indicates selected option in attribute
+        // builds {key: value} pair where {attribute: selected_option}
         const attributesObj = this.props.attributes.length > 0 ? {
             ...Object.assign(
                 ...this.props.attributes.map(
-                    item => {
-                        const attributesMap = new Array(item.items.length).fill(0);
-                        attributesMap[0] = 1
-
-                        return {[item.name]: attributesMap}
-                    }
+                    item => ({[item.name]: item.items[0].value})
                 )
             )
         } : null;
@@ -110,7 +104,8 @@ class ProductDetails extends PureComponent{
             prices,
             gallery,
             attributes,
-            selectedAttributes: {...this.state}
+            selectedAttributes: {...this.state},
+            amount: 1
         }
 
         this.props.addToCart(newItem);
