@@ -11,6 +11,25 @@ const Styles = styled.div`
     height: auto;
 
     cursor: pointer;
+
+    .cart-counter{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        font-size: 0.875rem;
+        color: white;
+
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: var(--color-black);
+
+        transform: translate(10px, -8px);
+    }
 `;
 
 class Cart extends PureComponent {
@@ -18,7 +37,8 @@ class Cart extends PureComponent {
         return(
             <Styles>
                 <img src={cartIcon} alt="Cart" />
-                <div>{this.props.cartAmount}</div>
+                {this.props.cartAmount ? 
+                    <div className="cart-counter">{this.props.cartAmount}</div> : null}
             </Styles>
         )
     }

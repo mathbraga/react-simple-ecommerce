@@ -18,7 +18,6 @@ const HeaderButtonsContainer = styled.div`
 
     *{
         color: var(--color-black);
-
         height: 100%;
     }
 
@@ -30,7 +29,6 @@ const HeaderButtonsContainer = styled.div`
 
         height: auto;
 
-        color: var(--color-black);
         font-weight: 500;
         font-size: 1.125rem;
 

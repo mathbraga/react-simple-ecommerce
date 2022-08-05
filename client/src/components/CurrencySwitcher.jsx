@@ -14,7 +14,6 @@ const Styles = styled.div`
     height: auto;
     margin-right: 20px;
 
-    color: var(--color-black);
     font-weight: 500;
     font-size: 1.125rem;
 

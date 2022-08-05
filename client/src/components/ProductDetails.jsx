@@ -8,7 +8,6 @@ import ProductTitle from "./ProductTitle";
 const Styles = styled.div`
     font-size: 1.875rem;
     font-weight: 400;
-    color: var(--color-black);
     justify-self: stretch;
 
     display: flex;
