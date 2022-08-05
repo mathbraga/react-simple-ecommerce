@@ -34,6 +34,10 @@ const Styles = styled.div`
         padding: 20px;
 
         cursor: pointer;
+
+        :active{
+            background-color: var(--color-smooth-green-dark);
+        }
     }
 
     .fragment-title{
