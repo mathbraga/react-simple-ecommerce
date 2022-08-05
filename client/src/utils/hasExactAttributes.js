@@ -1,14 +1,8 @@
 const hasExactAttributes = (currentItem, newItem) => {
-    const attributes = Object.keys(newItem.selectedAttributes);
-    const hasExactAttributes = attributes.every(
-        attribute => {
-            const current = currentItem.selectedAttributes[attribute];
-            const newAttr = newItem.selectedAttributes[attribute];
-            
-            return current === newAttr;
-    })
+    const currItemSelections = JSON.stringify(currentItem.selectedAttributes);
+    const newItemSelections = JSON.stringify(newItem.selectedAttributes);
 
-    return hasExactAttributes;
+    return currItemSelections === newItemSelections;
 }
 
 export default hasExactAttributes;

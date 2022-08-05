@@ -53,7 +53,7 @@ class ProductDetails extends PureComponent{
         super(props);
 
         this.state = {
-            ...this.returnAttributesObject()
+            attributesArray: new Array(this.props.attributes.length).fill(0)
         }
     }
 
@@ -69,22 +69,12 @@ class ProductDetails extends PureComponent{
         return `${price[0].currency.symbol} ${price[0].amount}`;
     }
 
-    returnAttributesObject = () => {
-        // builds {key: value} pair where {attribute: selected_option}
-        const attributesObj = this.props.attributes.length > 0 ? {
-            ...Object.assign(
-                ...this.props.attributes.map(
-                    item => ({[item.name]: item.items[0].value})
-                )
-            )
-        } : null;
-
-        return attributesObj;
-    }
-
-    handleAttributeSelect = (attributeName, attributeValue) => {
+    handleAttributeSelect = (selectedOption, attributeIdx) => {
+        const { attributesArray } = this.state;
+        attributesArray[attributeIdx] = selectedOption;
+        
         this.setState(() => ({
-            [attributeName]: attributeValue
+            attributesArray: attributesArray
         }));
     }
 
@@ -104,7 +94,7 @@ class ProductDetails extends PureComponent{
             prices,
             gallery,
             attributes,
-            selectedAttributes: {...this.state},
+            selectedAttributes: this.state.attributesArray,
             amount: 1
         }
 
@@ -126,7 +116,7 @@ class ProductDetails extends PureComponent{
                 </div>
                 {this.props.attributes.map(
                     (item, index) => 
-                        <Attributes attribute={item} key={index} onClick={this.handleAttributeSelect}/>
+                        <Attributes attribute={item} key={index} refIndex={index} onClick={this.handleAttributeSelect}/>
                 )}
                 <div>
                     <div className="fragment-title">PRICE:</div>

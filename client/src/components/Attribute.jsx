@@ -77,14 +77,12 @@ class Attribute extends PureComponent{
         return index === this.state.selected;
     }
 
-    selectAttribute = (index, attributeValue) => {
-        const { name } = this.props.attribute;
-
+    selectAttribute = (index) => {
         this.setState(() => {
             return {selected: index}
         });
 
-        this.props.onClick(name, attributeValue);
+        this.props.onClick(index, this.props.refIndex);
     }
 
     render(){

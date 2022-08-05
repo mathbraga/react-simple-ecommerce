@@ -40,7 +40,7 @@ class Product extends PureComponent {
             prices,
             gallery,
             attributes,
-            selectedAttributes: {},
+            selectedAttributes: [],
             amount: 1
         }
 
