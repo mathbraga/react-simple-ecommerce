@@ -22,6 +22,10 @@ const Styles = styled.div`
     }
 
     background-color: var(--color-smooth-green);
+
+    :active{
+        background-color: var(--color-smooth-green-dark);
+    }
 `;
 
 class AddToCartBadge extends PureComponent {
