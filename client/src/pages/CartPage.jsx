@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import CartItem from "../components/CartItem";
-import PageTitle from "../components/PageTitle";
+import Title from "../components/Title";
 import PageContainer from "../containers/PageContainer";
 
 const Items = styled.div`
@@ -28,13 +28,13 @@ class CartPage extends PureComponent {
 
         return(
             <PageContainer>
-                <PageTitle
+                <Title
                     size="2rem"
                     weight="700"
                     bottomSpace="52px"
                 >
                     {this.props.pageTitle}
-                </PageTitle>
+                </Title>
                 {cartAmount ? 
                     <Items>
                         {itemIds.map((items, index) => 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { addItemToCart } from "../../store/reducers/cartSlice";
 import Attribute from "../Attribute";
-import ProductTitle from "../ProductTitle";
+import Title from "../Title";
 import Price from "../Price";
 
 const Styles = styled.div`
@@ -96,12 +96,12 @@ class ProductDetails extends PureComponent{
         return(
             <Styles>
                 <div>
-                    <ProductTitle size="1.875rem" weight="600">
+                    <Title size="1.875rem" weight="600">
                         {this.props.brand}
-                    </ProductTitle>
-                    <ProductTitle>
+                    </Title>
+                    <Title>
                         {this.props.name}
-                    </ProductTitle>
+                    </Title>
                 </div>
                 {this.props.attributes.map(
                     (item, index) => 

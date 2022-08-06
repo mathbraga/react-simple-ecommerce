@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import Price from "../Price";
-import ProductTitle from "../ProductTitle";
+import Title from "../Title";
 
 const Styles = styled.div`
 `;
@@ -16,8 +16,8 @@ class CartItem extends PureComponent {
 
         return(
             <Styles>
-                <ProductTitle size="1.875rem" weight="600">{brand}</ProductTitle>
-                <ProductTitle size="1.875rem" weight="400">{name}</ProductTitle>
+                <Title size="1.875rem" weight="600">{brand}</Title>
+                <Title size="1.875rem" weight="400">{name}</Title>
                 <Price size="1.5rem" weight="700" priceList={prices} />
             </Styles>
         )
