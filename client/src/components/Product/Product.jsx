@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import ProductContainer from "../containers/ProductContainer";
-import AddToCartBadge from "./AddToCartBadge";
-import { addItemToCart } from "../store/reducers/cartSlice";
-import Price from "./Price";
+import ProductContainer from "../../containers/ProductContainer";
+import AddToCartBadge from "../AddToCartBadge";
+import { addItemToCart } from "../../store/reducers/cartSlice";
+import Price from "../Price";
 
 class Product extends PureComponent {
     isInStock = () => {
@@ -52,7 +52,9 @@ class Product extends PureComponent {
                             {this.props.data.attributes.length ? 
                                 null : <AddToCartBadge className="cart-btn" onClick={this.handleCartClick} />}
                         </div>
-                        <div className="product-name">{`${this.props.data.brand} ${this.props.data.name}`}</div>
+                        <div className="product-name">
+                            {`${this.props.data.brand} ${this.props.data.name}`}
+                        </div>
                         <div className="product-price">
                             <Price size="1.125rem" weight="500" priceList={this.props.data.prices} />
                         </div>

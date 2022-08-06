@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { addItemToCart } from "../store/reducers/cartSlice";
-import Attributes from "./Attribute";
-import ProductTitle from "./ProductTitle";
-import Price from "./Price";
+import { addItemToCart } from "../../store/reducers/cartSlice";
+import Attribute from "../Attribute";
+import ProductTitle from "../ProductTitle";
+import Price from "../Price";
 
 const Styles = styled.div`
     font-size: 1.875rem;
@@ -105,7 +105,7 @@ class ProductDetails extends PureComponent{
                 </div>
                 {this.props.attributes.map(
                     (item, index) => 
-                        <Attributes attribute={item} key={index} refIndex={index} onClick={this.handleAttributeSelect}/>
+                        <Attribute attribute={item} key={index} refIndex={index} onClick={this.handleAttributeSelect}/>
                 )}
                 <div>
                     <div className="fragment-title">PRICE:</div>

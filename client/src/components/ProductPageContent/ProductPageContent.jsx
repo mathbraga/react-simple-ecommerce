@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { client, Query, Field } from "@tilework/opus";
 import PropTypes from "prop-types";
-import Product from "./Product";
-import ProductsGrid from "../containers/ProductsGrid";
+import Product from "../Product";
+import ProductsGrid from "../../containers/ProductsGrid";
 
 class ProductPageContent extends PureComponent {
     constructor(props){

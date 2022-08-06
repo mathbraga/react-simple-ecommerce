@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
-import ImageSlider from "./ImageSlider";
-import arrowUp from "../assets/icons/arrow-up.svg";
-import arrowDown from "../assets/icons/arrow-down.svg";
+import ImageSlider from "../ImageSlider";
+import arrowUp from "../../assets/icons/arrow-up.svg";
+import arrowDown from "../../assets/icons/arrow-down.svg";
 import styled from "styled-components";
 
 const Styles = styled.div`

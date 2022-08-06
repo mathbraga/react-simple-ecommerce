@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
-import Price from "./Price";
-import ProductTitle from "./ProductTitle";
+import Price from "../Price";
+import ProductTitle from "../ProductTitle";
 
 const Styles = styled.div`
 `;

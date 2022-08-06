@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
-import cardCartIcon from "../assets/icons/card-cart.svg";
+import cardCartIcon from "../../assets/icons/card-cart.svg";
 
 const Styles = styled.div`
     position: absolute;

@@ -8,19 +8,16 @@ import PageContainer from "../containers/PageContainer";
 const Items = styled.div`
     display: flex;
     flex-direction: column;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 
     & > div{
-        border-top: 1px solid #e5e5e5;
         border-bottom: 1px solid #e5e5e5;
         padding: 24px 0;
     }
 
-    & > :first-child{
-        border-bottom: none;
-    }
-
     & > :last-child{
-        border-top: none;
+        border-bottom: none;
     }
 `;
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import cartIcon from '../assets/icons/cart.svg';
+import cartIcon from '../../assets/icons/cart.svg';
 
 const Styles = styled.div`
     display: flex;

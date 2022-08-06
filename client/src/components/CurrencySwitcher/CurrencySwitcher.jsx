@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { update } from "../store/reducers/currencySlice";
+import { update } from "../../store/reducers/currencySlice";
 import styled from "styled-components";
-import downArrow from '../assets/icons/arrow.svg';
-import CurrencyMenu from "./CurrencyMenu";
+import downArrow from '../../assets/icons/arrow.svg';
+import CurrencyMenu from "../CurrencyMenu";
 import { client, Query } from "@tilework/opus";
 
 const Styles = styled.div`

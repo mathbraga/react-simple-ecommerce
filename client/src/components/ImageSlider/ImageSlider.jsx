@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import ImageList from "./ImageList";
+import ImageList from "../ImageList";
 import styled from "styled-components";
 
 const ImageSliderStyles = styled.div`
