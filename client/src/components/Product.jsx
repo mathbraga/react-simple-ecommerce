@@ -4,22 +4,11 @@ import { Link } from "react-router-dom";
 import ProductContainer from "../containers/ProductContainer";
 import AddToCartBadge from "./AddToCartBadge";
 import { addItemToCart } from "../store/reducers/cartSlice";
+import Price from "./Price";
 
 class Product extends PureComponent {
     isInStock = () => {
         return this.props.data.inStock;
-    }
-
-    returnSelectedCurrency = () => {
-        const price = this.props.data.prices.filter(
-            item => item.currency.symbol === this.props.defaultCurrency
-        )
-
-        return (
-            <div className="product-price">
-                {`${price[0].currency.symbol}${price[0].amount}`}
-            </div>
-        )
     }
 
     handleCartClick = (event) => {
@@ -64,19 +53,17 @@ class Product extends PureComponent {
                                 null : <AddToCartBadge className="cart-btn" onClick={this.handleCartClick} />}
                         </div>
                         <div className="product-name">{`${this.props.data.brand} ${this.props.data.name}`}</div>
-                        {this.returnSelectedCurrency()}
+                        <div className="product-price">
+                            <Price size="1.125rem" weight="500" priceList={this.props.data.prices} />
+                        </div>
                 </ProductContainer>
             </Link>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-    defaultCurrency: state.currency.defaultCurrency
-})
-
 const mapDispatchToProps = (dispatch) => ({
     addToCart: (newItem) => dispatch(addItemToCart(newItem))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(null, mapDispatchToProps)(Product);

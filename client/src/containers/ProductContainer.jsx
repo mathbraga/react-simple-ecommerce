@@ -46,9 +46,6 @@ const ProductContainer = styled.div`
     }
 
     .product-price{
-        font-size: 1.125rem;
-        font-weight: 500;
-
         padding: 4px 0;
     }
 

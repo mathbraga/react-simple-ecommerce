@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { addItemToCart } from "../store/reducers/cartSlice";
 import Attributes from "./Attribute";
 import ProductTitle from "./ProductTitle";
+import Price from "./Price";
 
 const Styles = styled.div`
     font-size: 1.875rem;
@@ -44,11 +45,6 @@ const Styles = styled.div`
         font-size: 1.125rem;
         font-weight: 700;
     }
-
-    .price-value{
-        font-weight: 700;
-        font-size: 1.5rem;
-    }
 `;
 
 class ProductDetails extends PureComponent{
@@ -62,14 +58,6 @@ class ProductDetails extends PureComponent{
 
     setHTML = () => {
         return {__html: this.props.description}
-    }
-
-    returnSelectedCurrency = () => {
-        const price = this.props.prices.filter(
-            item => item.currency.symbol === this.props.defaultCurrency
-        );
-
-        return `${price[0].currency.symbol} ${price[0].amount}`;
     }
 
     handleAttributeSelect = (selectedOption, attributeIdx) => {
@@ -105,8 +93,6 @@ class ProductDetails extends PureComponent{
     }
 
     render(){
-        const price = this.returnSelectedCurrency();
-
         return(
             <Styles>
                 <div>
@@ -123,7 +109,11 @@ class ProductDetails extends PureComponent{
                 )}
                 <div>
                     <div className="fragment-title">PRICE:</div>
-                    <div className="price-value">{price}</div>
+                    <Price 
+                        priceList={this.props.prices}
+                        size="1.5rem"
+                        weight="700"
+                    />
                 </div>
                 <button className="btn-cart" onClick={this.handleCartClick}>ADD TO CART</button>
                 <div className="description" dangerouslySetInnerHTML={this.setHTML()}/>
@@ -132,12 +122,8 @@ class ProductDetails extends PureComponent{
     }
 }
 
-const mapStateToProps = (state) => ({
-    defaultCurrency: state.currency.defaultCurrency
-});
-
 const mapDispatchToProps = (dispatch) => ({
     addToCart: (newItem) => dispatch(addItemToCart(newItem))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default connect(null, mapDispatchToProps)(ProductDetails);
