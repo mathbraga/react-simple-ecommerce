@@ -5,6 +5,15 @@ import CartItem from "../components/CartItem";
 import Title from "../components/Title";
 import PageContainer from "../containers/PageContainer";
 
+const Styles = styled.div`
+    .empty-message{
+        display: flex;
+        justify-content: center;
+
+        font-weight: bold;
+    }
+`;
+
 const Items = styled.div`
     display: flex;
     flex-direction: column;
@@ -28,27 +37,29 @@ class CartPage extends PureComponent {
 
         return(
             <PageContainer>
-                <Title
-                    size="2rem"
-                    weight="700"
-                    bottomSpace="52px"
-                >
-                    {this.props.pageTitle}
-                </Title>
-                {cartAmount ? 
-                    <Items>
-                        {itemIds.map((items, index) => 
-                            cartItems[items].map(
-                                (item, innerIdx) => 
-                                    <CartItem 
-                                        key={`${index}${innerIdx}`}
-                                        product={item} 
-                                    />
-                            )
-                        )}
-                    </Items>
-                    : null
-                }
+                <Styles>
+                    <Title
+                        size="2rem"
+                        weight="700"
+                        bottomSpace="52px"
+                    >
+                        {this.props.pageTitle}
+                    </Title>
+                    {cartAmount ? 
+                        <Items>
+                            {itemIds.map((items, index) => 
+                                cartItems[items].map(
+                                    (item, innerIdx) => 
+                                        <CartItem 
+                                            key={`${index}${innerIdx}`}
+                                            product={item}
+                                        />
+                                )
+                            )}
+                        </Items>
+                        : <div className="empty-message">No items in cart.</div>
+                    }
+                </Styles>
             </PageContainer>
         );
     }

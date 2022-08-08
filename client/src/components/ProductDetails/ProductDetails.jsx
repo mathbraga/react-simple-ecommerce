@@ -61,11 +61,11 @@ class ProductDetails extends PureComponent{
     }
 
     handleAttributeSelect = (selectedOption, attributeIdx) => {
-        const { attributesArray } = this.state;
-        attributesArray[attributeIdx] = selectedOption;
-        
+        const selections = [...this.state.attributesArray];
+        selections[attributeIdx] = selectedOption;
+
         this.setState(() => ({
-            attributesArray: attributesArray
+            attributesArray: selections
         }));
     }
 

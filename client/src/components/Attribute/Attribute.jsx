@@ -69,7 +69,7 @@ class Attribute extends PureComponent{
         super(props);
 
         this.state = {
-            selected: 0
+            selected: this.props.selection || 0
         }
     }
 
