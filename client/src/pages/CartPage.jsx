@@ -47,12 +47,14 @@ class CartPage extends PureComponent {
                     </Title>
                     {cartAmount ? 
                         <Items>
-                            {itemIds.map((items, index) => 
-                                cartItems[items].map(
+                            {itemIds.map((id, index) => 
+                                cartItems[id].map(
                                     (item, innerIdx) => 
                                         <CartItem 
                                             key={`${index}${innerIdx}`}
                                             product={item}
+                                            productId={id}
+                                            refIndex={innerIdx}
                                         />
                                 )
                             )}

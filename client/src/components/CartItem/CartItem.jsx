@@ -1,4 +1,6 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { updateItemAmount } from "../../store/reducers/cartSlice";
 import styled from "styled-components";
 import Price from "../Price";
 import Title from "../Title";
@@ -50,6 +52,8 @@ const Styles = styled.div`
             .quantity-btn{
                 height: 45px;
                 width: 45px;
+
+                cursor: pointer;
             }
         }
     }
@@ -66,6 +70,7 @@ class CartItem extends PureComponent {
             selectedAttributes,
             amount
         } = this.props.product;
+        const { productId, refIndex, updateQuantity } = this.props;
 
         return(
             <Styles>
@@ -89,19 +94,30 @@ class CartItem extends PureComponent {
                 </div>
                 <div className="image-section">
                     <div className="product-amount">
-                        <div className="quantity-btn">
+                        <div 
+                            className="quantity-btn" 
+                            onClick={() => updateQuantity(1, productId, refIndex)}
+                        >
                             <img src={addIcon} alt="add product" />
                         </div>
                         {amount}
-                        <div className="quantity-btn">
+                        <div 
+                            className="quantity-btn" 
+                            onClick={() =>updateQuantity(-1, productId, refIndex)}
+                        >
                             <img src={removeIcon} alt="remove product" />
                         </div>
                     </div>
-                    <img src={gallery[0]} alt="test" />
+                    <img src={gallery[0]} alt="product thumbnail" />
                 </div>
             </Styles>
         )
     }
 }
 
-export default CartItem;
+const mapDispatchToProps = (dispatch) => ({
+    updateQuantity: (updateValue, productId, itemIndex) => 
+        dispatch(updateItemAmount({ updateValue, productId, itemIndex }))
+});
+
+export default connect(null, mapDispatchToProps)(CartItem);

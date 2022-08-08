@@ -46,10 +46,26 @@ export const cartSlice = createSlice({
             // add to total cart amount regardless
             state.cartItems.cartAmount++;
             localStorage.cartItems = JSON.stringify(state.cartItems);
+        },
+
+        updateItemAmount: (state, action) => {
+            let { updateValue, productId, itemIndex } = action.payload;
+
+            state.cartItems[productId][itemIndex].amount += updateValue;
+            
+            if(!state.cartItems[productId][itemIndex].amount)
+                state.cartItems[productId].splice(itemIndex, 1);
+            
+            if(!state.cartItems[productId].length){
+                delete state.cartItems[productId];
+            }
+
+            state.cartItems.cartAmount += updateValue;
+            localStorage.cartItems = JSON.stringify(state.cartItems);
         }
     }
 });
 
-export const { addItemToCart } = cartSlice.actions;
+export const { addItemToCart, updateItemAmount } = cartSlice.actions;
 
 export default cartSlice.reducer;
