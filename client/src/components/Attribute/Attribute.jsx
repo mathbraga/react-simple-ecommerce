@@ -57,8 +57,8 @@ const SwatchType = styled.div`
         cursor: pointer;
 
         &.color-selected{
-            width: 35px;
-            height: 35px;
+            width: 34px;
+            height: 34px;
             border: none;
         }
     }

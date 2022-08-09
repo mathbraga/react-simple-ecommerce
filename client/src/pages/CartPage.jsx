@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Button from "../components/Button";
 import CartItem from "../components/CartItem";
 import Title from "../components/Title";
 import PageContainer from "../containers/PageContainer";
@@ -17,16 +18,30 @@ const Styles = styled.div`
         font-size: 1.5rem;
 
         margin-top: 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+        width: 240px;
 
-        & > :last-child{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 8px 4px;
+
+        .emph{
             font-weight: 500;
         }
-
-        span{
+    
+        .highlight{
             font-weight: 700;
+        }
+
+        .order-btn{
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 20px;
+
+            grid-column: 1 / 3;
+
+            :active{
+                background-color: var(--color-smooth-green-dark);
+            }
         }
     }
 `;
@@ -95,9 +110,26 @@ class CartPage extends PureComponent {
                                 )}
                             </Items>
                             <div className="cart-details">
-                                <div>Tax 21%: <span>{`${currencySymbol}${(this.returnTotalPrice()*0.21).toFixed(2)}`}</span></div>
-                                <div>Quantity: <span>{cartAmount}</span></div>
-                                <div>Total: <span>{`${currencySymbol}${this.returnTotalPrice().toFixed(2)}`}</span></div>
+                                <div>Tax 21%:</div>
+                                <div className="highlight">
+                                    {`${currencySymbol}${(this.returnTotalPrice()*0.21).toFixed(2)}`}
+                                </div>
+
+                                <div>Quantity:</div>
+                                <div className="highlight">{cartAmount}</div>
+
+                                <div className="emph">Total:</div>
+                                <div className="highlight">
+                                    {`${currencySymbol}${this.returnTotalPrice().toFixed(2)}`}
+                                </div>
+
+                                <Button 
+                                    color="var(--color-smooth-green)"
+                                    textColor="white"
+                                    className="order-btn"
+                                >
+                                    ORDER
+                                </Button>
                             </div>
                         </div>
                         : <div className="empty-message">No items in cart.</div>

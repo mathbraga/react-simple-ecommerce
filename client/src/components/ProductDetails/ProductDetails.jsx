@@ -5,6 +5,7 @@ import { addItemToCart } from "../../store/reducers/cartSlice";
 import Attribute from "../Attribute";
 import Title from "../Title";
 import Price from "../Price";
+import Button from "../Button";
 
 const Styles = styled.div`
     font-size: 1.875rem;
@@ -25,15 +26,10 @@ const Styles = styled.div`
 
     .btn-cart{
         font-weight: 600;
-        color: white;
-
         width: 100%;
-        background-color: var(--color-smooth-green);
+        max-width: 292px;
 
-        border: none;
         padding: 20px;
-
-        cursor: pointer;
 
         :active{
             background-color: var(--color-smooth-green-dark);
@@ -115,7 +111,14 @@ class ProductDetails extends PureComponent{
                         weight="700"
                     />
                 </div>
-                <button className="btn-cart" onClick={this.handleCartClick}>ADD TO CART</button>
+                <Button
+                    className="btn-cart"
+                    color="var(--color-smooth-green)"
+                    textColor="white"
+                    onClick={this.handleCartClick}
+                >
+                    ADD TO CART
+                </Button>
                 <div className="description" dangerouslySetInnerHTML={this.setHTML()}/>
             </Styles>
         )
