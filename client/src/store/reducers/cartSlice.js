@@ -53,9 +53,11 @@ export const cartSlice = createSlice({
 
             state.cartItems[productId][itemIndex].amount += updateValue;
             
+            // if specific item amount is 0, remove from list
             if(!state.cartItems[productId][itemIndex].amount)
                 state.cartItems[productId].splice(itemIndex, 1);
             
+            // if 0 products of that id, remove from cart
             if(!state.cartItems[productId].length){
                 delete state.cartItems[productId];
             }

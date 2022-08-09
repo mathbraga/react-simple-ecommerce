@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ButtonContainer = styled.div`
+const HeaderLinkContainer = styled.div`
     font-weight: inherit;
     font-size: 1rem;
     line-height: 120%;
@@ -14,4 +14,4 @@ const ButtonContainer = styled.div`
     padding: 0 16px;
 `;
 
-export default ButtonContainer;
+export default HeaderLinkContainer;

@@ -49,7 +49,7 @@ class CurrencyMenu extends PureComponent {
                         <div 
                             key={index}
                             className="currency-option"
-                            onClick={() => this.props.updater(item.symbol)}
+                            onClick={() => this.props.updater(index)}
                         >
                             {`${item.symbol} ${item.label}`}
                         </div>

@@ -9,11 +9,9 @@ const Styles = styled.div`
 
 class Price extends PureComponent {
     returnSelectedCurrency = () => {
-        const price = this.props.priceList.filter(
-            item => item.currency.symbol === this.props.defaultCurrency
-        );
+        const { priceList, defaultCurrency } = this.props;
 
-        return `${price[0].currency.symbol}${price[0].amount}`;
+        return `${priceList[defaultCurrency].currency.symbol}${priceList[defaultCurrency].amount}`;
     }
 
     render(){

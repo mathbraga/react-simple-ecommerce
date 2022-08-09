@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 import HeaderContainer from '../../containers/HeaderContainer';
 import HeaderButtonsContainer from '../../containers/HeaderButtonsContainer';
-import ButtonContainer from '../../containers/ButtonContainer';
+import ButtonContainer from '../../containers/HeaderLinkContainer';
 import logoIcon from '../../assets/icons/a-logo.svg';
 import CurrencySwitcher from '../CurrencySwitcher';
 import Cart from '../Cart';

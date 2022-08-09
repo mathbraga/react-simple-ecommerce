@@ -67,6 +67,10 @@ class CurrencySwitcher extends PureComponent {
     }
 
     render(){
+        const { defaultCurrency } = this.props;
+        const currentSymbol = this.state.currencyList.length ? 
+                            this.state.currencyList[defaultCurrency].symbol : "";  
+
         return(
             <Styles
                 id={this.switcherBtnId}
@@ -74,7 +78,7 @@ class CurrencySwitcher extends PureComponent {
                 arrowDeg={this.handleArrowDegree} 
                 displayMenu={this.handleMenu}
             >
-                <div className="no-pointer-events">{this.props.defaultCurrency}</div>
+                <div className="no-pointer-events">{currentSymbol}</div>
                 <img src={downArrow} alt="arrow down" className="currency-arrow no-pointer-events" />
                 {this.state.displayMenu ? 
                     <CurrencyMenu 

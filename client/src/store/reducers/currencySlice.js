@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    defaultCurrency: localStorage.currency || "$"
+    defaultCurrency: localStorage.currency || 0
 }
 
 export const currencySlice = createSlice({

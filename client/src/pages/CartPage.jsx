@@ -12,6 +12,23 @@ const Styles = styled.div`
 
         font-weight: bold;
     }
+
+    .cart-details{
+        font-size: 1.5rem;
+
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        & > :last-child{
+            font-weight: 500;
+        }
+
+        span{
+            font-weight: 700;
+        }
+    }
 `;
 
 const Items = styled.div`
@@ -31,9 +48,26 @@ const Items = styled.div`
 `;
 
 class CartPage extends PureComponent {
+    returnTotalPrice = () => {
+        const { cartItems, currency } = this.props;
+        const { cartAmount, ...products } = cartItems;
+        const items = Object.keys(products);
+        let totalPrice = 0;
+
+        items.forEach(item => {
+            products[item].forEach(product => {
+                totalPrice += product.prices[currency].amount*product.amount;
+            });
+        })
+
+        return totalPrice;
+    }
+
     render(){
         const { cartAmount, ...cartItems } = this.props.cartItems;
         const itemIds = Object.keys(cartItems);
+        const currencySymbol = itemIds.length ? 
+                    cartItems[itemIds[0]][0].prices[this.props.currency].currency.symbol : "";
 
         return(
             <PageContainer>
@@ -46,19 +80,26 @@ class CartPage extends PureComponent {
                         {this.props.pageTitle}
                     </Title>
                     {cartAmount ? 
-                        <Items>
-                            {itemIds.map((id, index) => 
-                                cartItems[id].map(
-                                    (item, innerIdx) => 
-                                        <CartItem 
-                                            key={`${index}${innerIdx}`}
-                                            product={item}
-                                            productId={id}
-                                            refIndex={innerIdx}
-                                        />
-                                )
-                            )}
-                        </Items>
+                        <div>
+                            <Items>
+                                {itemIds.map((id, index) => 
+                                    cartItems[id].map(
+                                        (item, innerIdx) => 
+                                            <CartItem 
+                                                key={`${index}${innerIdx}`}
+                                                product={item}
+                                                productId={id}
+                                                refIndex={innerIdx}
+                                            />
+                                    )
+                                )}
+                            </Items>
+                            <div className="cart-details">
+                                <div>Tax 21%: <span>{`${currencySymbol}${(this.returnTotalPrice()*0.21).toFixed(2)}`}</span></div>
+                                <div>Quantity: <span>{cartAmount}</span></div>
+                                <div>Total: <span>{`${currencySymbol}${this.returnTotalPrice().toFixed(2)}`}</span></div>
+                            </div>
+                        </div>
                         : <div className="empty-message">No items in cart.</div>
                     }
                 </Styles>
@@ -68,7 +109,8 @@ class CartPage extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    cartItems: state.cart.cartItems
+    cartItems: state.cart.cartItems,
+    currency: state.currency.defaultCurrency
 });
 
 export default connect(mapStateToProps)(CartPage);
