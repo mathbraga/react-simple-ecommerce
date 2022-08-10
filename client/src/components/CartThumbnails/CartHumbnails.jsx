@@ -1,21 +1,24 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Styles = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    overflow: hidden;
 
     .img-container{
         display: flex;
         align-items: center;
         width: ${props => props.width};
-        overflow: hidden;
 
         img{
             height: fill;
             width: ${props => props.width};
         }
+
+        transition: all 200ms ease-out;
+        transform: translate(calc(-200px*${props => props.counter}));
     }
 
     .thumb-slider{
@@ -58,7 +61,7 @@ class CartThumbnails extends PureComponent{
                     )}
                 </div>
                 <div className="thumb-slider">
-                    <div>{"<"}</div>
+                    <div onClick={() => this.updateCounter(-1)}>{"<"}</div>
                     <div onClick={() => this.updateCounter(1)}>{">"}</div>
                 </div>
             </Styles>
