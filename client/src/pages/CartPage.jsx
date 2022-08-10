@@ -103,6 +103,7 @@ class CartPage extends PureComponent {
                                         (item, innerIdx) => 
                                             <CartItem 
                                                 key={`${index}${innerIdx}`}
+                                                uniqueIndex={`${index}${innerIdx}`}
                                                 product={item}
                                                 productId={id}
                                                 refIndex={innerIdx}

@@ -1,1 +1,1 @@
-export { default } from "./CartHumbnails";
+export { default } from "./CartThumbnails";

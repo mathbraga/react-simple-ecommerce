@@ -102,7 +102,7 @@ class CartItem extends PureComponent {
                             <img src={removeIcon} alt="remove product" />
                         </div>
                     </div>
-                    <CartThumbnails images={gallery} width="200px" />
+                    <CartThumbnails images={gallery} width="200px" uniqueIdx={this.props.uniqueIndex} />
                 </div>
             </Styles>
         )
