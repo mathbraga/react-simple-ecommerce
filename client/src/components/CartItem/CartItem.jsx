@@ -7,6 +7,7 @@ import Title from "../Title";
 import Attribute from "../Attribute";
 import addIcon from "../../assets/icons/plus-square.svg";
 import removeIcon from "../../assets/icons/minus-square.svg";
+import CartThumbnails from "../CartThumbnails";
 
 const Styles = styled.div`
     display: flex;
@@ -32,13 +33,6 @@ const Styles = styled.div`
     .image-section{
         display: flex;
         gap: 24px;
-
-        & > img{
-            height: fill;
-            width: 200px;
-
-            align-self: center;
-        }
 
         .product-amount{
             display: flex;
@@ -108,7 +102,7 @@ class CartItem extends PureComponent {
                             <img src={removeIcon} alt="remove product" />
                         </div>
                     </div>
-                    <img src={gallery[0]} alt="product thumbnail" />
+                    <CartThumbnails images={gallery} width="200px" />
                 </div>
             </Styles>
         )

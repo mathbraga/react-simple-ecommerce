@@ -36,6 +36,7 @@ const Styles = styled.div`
             font-size: 0.875rem;
             font-weight: 600;
             padding: 20px;
+            margin-top: 16px;
 
             grid-column: 1 / 3;
 
