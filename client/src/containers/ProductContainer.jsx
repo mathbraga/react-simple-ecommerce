@@ -28,7 +28,7 @@ const ProductContainer = styled.div`
 
         .no-stock-notice{
             position: absolute;
-            z-index: 99;
+            z-index: 1;
 
             font-size: 24px;
             color: var(--color-grey);

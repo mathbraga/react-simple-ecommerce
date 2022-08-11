@@ -21,20 +21,6 @@ const HeaderButtonsContainer = styled.div`
         height: 100%;
     }
 
-    .header-interactable-icon{
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-
-        height: auto;
-
-        font-weight: 500;
-        font-size: 1.125rem;
-
-        cursor: pointer;
-    }
-
     .page-link{
         box-sizing: border-box;
         border-bottom: 2px solid transparent;

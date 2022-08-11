@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import cartIcon from '../../assets/icons/cart.svg';
+import CartOverlay from "../CartOverlay";
 
 const Styles = styled.div`
     display: flex;
@@ -34,18 +35,28 @@ const Styles = styled.div`
 
 class Cart extends PureComponent {
     render(){
+        const { cartAmount, ...cartItems } = this.props.cartItems;
+        const { currency } = this.props
+
         return(
-            <Styles>
+            <Styles onClick={this.props.onClick}>
                 <img src={cartIcon} alt="Cart" />
-                {this.props.cartAmount ? 
-                    <div className="cart-counter">{this.props.cartAmount}</div> : null}
+                {cartAmount ? 
+                    <div className="cart-counter">{cartAmount}</div> : null}
+                {this.props.isOverlay ? 
+                    <CartOverlay 
+                        quantity={cartAmount} 
+                        items={cartItems} 
+                        currency={currency}
+                    /> : null}
             </Styles>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    cartAmount: state.cart.cartItems.cartAmount
+    cartItems: state.cart.cartItems,
+    currency: state.currency.defaultCurrency
 })
 
 export default connect(mapStateToProps)(Cart);

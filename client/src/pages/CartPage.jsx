@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import CartItem from "../components/CartItem";
 import Title from "../components/Title";
 import PageContainer from "../containers/PageContainer";
+import returnTotalPrice from "../utils/returnTotalPrice";
 
 const Styles = styled.div`
     .empty-message{
@@ -64,26 +65,12 @@ const Items = styled.div`
 `;
 
 class CartPage extends PureComponent {
-    returnTotalPrice = () => {
-        const { cartItems, currency } = this.props;
-        const { cartAmount, ...products } = cartItems;
-        const items = Object.keys(products);
-        let totalPrice = 0;
-
-        items.forEach(item => {
-            products[item].forEach(product => {
-                totalPrice += product.prices[currency].amount*product.amount;
-            });
-        })
-
-        return totalPrice;
-    }
-
     render(){
         const { cartAmount, ...cartItems } = this.props.cartItems;
+        const { currency } = this.props;
         const itemIds = Object.keys(cartItems);
         const currencySymbol = itemIds.length ? 
-                    cartItems[itemIds[0]][0].prices[this.props.currency].currency.symbol : "";
+                    cartItems[itemIds[0]][0].prices[currency].currency.symbol : "";
 
         return(
             <PageContainer>
@@ -114,7 +101,7 @@ class CartPage extends PureComponent {
                             <div className="cart-details">
                                 <div>Tax 21%:</div>
                                 <div className="highlight">
-                                    {`${currencySymbol}${(this.returnTotalPrice()*0.21).toFixed(2)}`}
+                                    {`${currencySymbol}${(returnTotalPrice(cartItems, currency)*0.21).toFixed(2)}`}
                                 </div>
 
                                 <div>Quantity:</div>
@@ -122,7 +109,7 @@ class CartPage extends PureComponent {
 
                                 <div className="emph">Total:</div>
                                 <div className="highlight">
-                                    {`${currencySymbol}${this.returnTotalPrice().toFixed(2)}`}
+                                    {`${currencySymbol}${returnTotalPrice(cartItems, currency).toFixed(2)}`}
                                 </div>
 
                                 <Button 

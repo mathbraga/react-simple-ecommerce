@@ -11,6 +11,8 @@ const Styles = styled.div`
     background-color: white;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
 
+    z-index: 99;
+
     cursor: default;
 
     .currency-option{
