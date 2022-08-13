@@ -3,24 +3,24 @@ import styled from "styled-components";
 
 const Styles = styled.div`
     .attribute-title{
-        font-family: 'Roboto Condensed', sans-serif;
-        font-size: 1.125rem;
-        font-weight: 700;
+        font-family: ${props => props.minified ? 'Raleway' : 'Roboto Condensed'}, sans-serif;
+        font-size: ${props => props.minified ? '0.875rem' : '1.125rem'};
+        font-weight: ${props => props.minified ? '400' : '700'};
     }
 
     .attribute-options{
         display: flex;
-        gap: 12px;
+        gap: 8px;
         flex-wrap: wrap;
 
         div{
             font-family: 'Source Sans Pro', sans-serif;
             font-weight: 400;
-            font-size: 1rem;
+            font-size: ${props => props.minified ? '0.875rem' : '1rem'};
 
             border: 1px solid black;
-            width: 63px;
-            height: 45px;
+            min-width: ${props => props.minified ? '24px' : '63px'};
+            min-height: ${props => props.minified ? '24px' : '45px'};
 
             display: flex;
             justify-content: center;
@@ -49,16 +49,16 @@ const SwatchType = styled.div`
     }
 
     div{
-        width: 32px;
-        height: 32px;
+        width: ${props => props.minified ? '16px' : '32px'};
+        height: ${props => props.minified ? '16px' : '32px'};
         border: 1px solid var(--color-black);
 
         background-color: ${props => props.color};
         cursor: pointer;
 
         &.color-selected{
-            width: 34px;
-            height: 34px;
+            width: ${props => props.minified ? '16px' : '34px'};
+            height: ${props => props.minified ? '16px' : '34px'};
             border: none;
         }
     }
@@ -91,10 +91,11 @@ class Attribute extends PureComponent{
             items,
             type
         } = this.props.attribute;
+        const { minified } = this.props;
         const isSwatch = type === "swatch";
 
         return(
-            <Styles>
+            <Styles minified={minified}>
                 <div className="attribute-title">{`${name}:`}</div>
                 <div className={isSwatch ? "swatch" : "attribute-options"}>
                     {items.map(
@@ -105,6 +106,7 @@ class Attribute extends PureComponent{
                                 key={index}
                                 className={this.isSelectedAttribute(index) ? "swatch-selected" : ""}
                                 onClick={() => this.selectAttribute(index, item.value)}
+                                minified={minified}
                             >
                                 <div 
                                     className={this.isSelectedAttribute(index) ? "color-selected" : ""} 

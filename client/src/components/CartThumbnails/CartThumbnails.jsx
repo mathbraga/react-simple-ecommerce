@@ -12,6 +12,7 @@ const Styles = styled.div`
     .img-container{
         display: flex;
         align-items: center;
+        height: auto;
         width: ${props => props.width};
 
         img{

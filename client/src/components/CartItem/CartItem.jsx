@@ -32,20 +32,23 @@ const Styles = styled.div`
 
     .image-section{
         display: flex;
-        gap: 24px;
+        gap: ${props => props.minified ? "8px" : "24px"};
+        align-items: stretch;
+        height: auto;
 
         .product-amount{
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            height: auto;
 
-            font-size: 1.5rem;
+            font-size: ${props => props.minified ? "1rem" : "1.5rem"};
             font-weight: 500;
 
             .quantity-btn{
-                height: 45px;
-                width: 45px;
+                height: ${props => props.minified ? "24px" : "45px"};
+                width: ${props => props.minified ? "24px" : "45px"};
 
                 cursor: pointer;
             }
@@ -62,17 +65,32 @@ class CartItem extends PureComponent {
             gallery,
             attributes
         } = this.props.product;
-        const { productId, quantity, updateQuantity, selectedAttributes } = this.props;
+        const { productId, quantity, updateQuantity, 
+            selectedAttributes, minified } = this.props;
         const selections = JSON.parse(selectedAttributes);
 
         return(
-            <Styles>
+            <Styles minified={minified}>
                 <div className="details-section">
                     <div>
-                        <Title size="1.875rem" weight="600">{brand}</Title>
-                        <Title size="1.875rem" weight="400">{name}</Title>
+                        <Title 
+                            size={minified ? "1rem" : "1.875rem"} 
+                            weight={minified ? "300" : "600"}
+                        >
+                            {brand}
+                        </Title>
+                        <Title 
+                            size={minified ? "1rem" : "1.875rem"} 
+                            weight={minified ? "300" : "400"}
+                        >
+                            {name}
+                        </Title>
                     </div>
-                    <Price size="1.5rem" weight="700" priceList={prices} />
+                    <Price 
+                        size={minified ? "1rem" : "1.5rem"}
+                        weight={minified ? "500" : "700"}
+                        priceList={prices} 
+                    />
                     <div className="attributes">
                         {attributes.map(
                             (item, index) => 
@@ -81,6 +99,7 @@ class CartItem extends PureComponent {
                                     key={index}
                                     refIndex={index}
                                     selection={selections[index]}
+                                    minified={minified}
                                 />
                         )}
                     </div>
@@ -101,7 +120,11 @@ class CartItem extends PureComponent {
                             <img src={removeIcon} alt="remove product" />
                         </div>
                     </div>
-                    <CartThumbnails images={gallery} width="200px" uniqueIdx={this.props.uniqueIndex} />
+                    <CartThumbnails 
+                        images={minified ? [gallery[0]] : gallery}
+                        width={minified ? "120px" : "200px"}
+                        uniqueIdx={this.props.uniqueIndex} 
+                    />
                 </div>
             </Styles>
         )

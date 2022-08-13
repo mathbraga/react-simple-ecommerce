@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import returnTotalPrice from "../../utils/returnTotalPrice";
 import Button from "../Button";
+import CartItem from "../CartItem";
 
 const Styles = styled.div`
     position: absolute;
@@ -24,7 +25,12 @@ const Styles = styled.div`
     font-size: 1rem;
 
     .cart-items{
-        height: 420px;
+        max-height: 420px;
+        overflow-y: auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
     }
 
     .cart-price{
@@ -70,21 +76,44 @@ class CartOverlay extends PureComponent {
     // }
 
     render(){
-        const { quantity, items, currency } = this.props;
-        const itemIds = Object.keys(items);
+        const { quantity, cartItems, currency } = this.props;
+        const itemIds = Object.keys(cartItems);
         const currencySymbol = itemIds.length ? 
-                    items[itemIds[0]].data.prices[currency].currency.symbol : "";
+                cartItems[itemIds[0]].data.prices[currency].currency.symbol : "";
 
         return(
             <Styles>
                 <div style={{fontWeight: "700"}}>
                     My bag, <span style={{fontWeight: "500"}}>{quantity} items</span>
                 </div>
-                <div className="cart-items"></div>
+                <div className="cart-items">
+                    {itemIds.map(id => {
+                        let itemEntries = Object.keys(cartItems[id].itemEntriesByAttributes);
+
+                        return(itemEntries.map(
+                            item => {
+                                let uniqueId = `${id}${item}`
+                                let quantity = cartItems[id].itemEntriesByAttributes[item];
+
+                                return(
+                                    <CartItem 
+                                        key={uniqueId}
+                                        uniqueIndex={uniqueId}
+                                        product={cartItems[id].data}
+                                        quantity={quantity}
+                                        selectedAttributes={item}
+                                        productId={id}
+                                        minified
+                                    />
+                                )
+                            }
+                        ))
+                    })}
+                </div>
                 <div className="cart-price">
                     <span style={{fontFamily: "'Roboto', sans-serif", fontWeight: "500"}}>Total</span>
                     <span style={{fontWeight: "700"}}>
-                        {currencySymbol}{returnTotalPrice(items, currency).toFixed(2)}
+                        {currencySymbol}{returnTotalPrice(cartItems, currency).toFixed(2)}
                     </span>
                 </div>
                 <div className="btn-section">

@@ -46,7 +46,7 @@ class Cart extends PureComponent {
                 {this.props.isOverlay ? 
                     <CartOverlay 
                         quantity={cartAmount} 
-                        items={cartItems} 
+                        cartItems={cartItems}
                         currency={currency}
                     /> : null}
             </Styles>
