@@ -47,9 +47,19 @@ const Styles = styled.div`
             font-weight: 500;
 
             .quantity-btn{
-                height: ${props => props.minified ? "24px" : "45px"};
-                width: ${props => props.minified ? "24px" : "45px"};
+                height: ${props => props.minified ? "23px" : "45px"};
+                width: ${props => props.minified ? "23px" : "45px"};
+                border: 1px solid black;
 
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img{
+                    width: ${props => props.minified ? "15px" : "24px"};
+                    height: ${props => props.minified ? "15px" : "24px"};
+                }
+                
                 cursor: pointer;
             }
         }

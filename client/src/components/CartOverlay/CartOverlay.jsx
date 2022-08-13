@@ -27,10 +27,35 @@ const Styles = styled.div`
     .cart-items{
         max-height: 420px;
         overflow-y: auto;
+        margin-right: -6px;
 
         display: flex;
         flex-direction: column;
+        flex-wrap: nowrap;
         gap: 40px;
+
+        ::-webkit-scrollbar{
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track{
+            background: hsl(0 0% 80% / 1);
+            border-radius: 100vw;
+            margin-block: .5em;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background: hsl(0 0% 40% / 1);
+            border-radius: 100vw;
+        }
+
+        // scrollbar for mozilla
+        @supports (scrollbar-color: red blue){
+            &{
+                scrollbar-color: hsl(0 0% 40% / 1) hsl(0 0% 80% / 1);
+                scrollbar-width: thin;
+            }
+        }
     }
 
     .cart-price{

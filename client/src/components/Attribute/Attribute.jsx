@@ -10,7 +10,7 @@ const Styles = styled.div`
 
     .attribute-options{
         display: flex;
-        gap: 8px;
+        gap: ${props => props.minified ? '4px' : '8px'};
         flex-wrap: wrap;
 
         div{
@@ -38,7 +38,8 @@ const Styles = styled.div`
     .swatch{
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: ${props => props.minified ? '4px' : '8px'};
+        flex-wrap: wrap;
     }
 `;
 
