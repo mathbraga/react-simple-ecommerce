@@ -70,7 +70,7 @@ class CartPage extends PureComponent {
         const { currency } = this.props;
         const itemIds = Object.keys(cartItems);
         const currencySymbol = itemIds.length ? 
-                    cartItems[itemIds[0]][0].prices[currency].currency.symbol : "";
+                    cartItems[itemIds[0]].data.prices[currency].currency.symbol : "";
 
         return(
             <PageContainer>
@@ -85,23 +85,27 @@ class CartPage extends PureComponent {
                     {cartAmount ? 
                         <div>
                             <Items>
-                                {itemIds.map(id => 
-                                    cartItems[id].map(
-                                        (item, innerIdx) => {
-                                            const uniqueId = `${id}${JSON.stringify(item.selectedAttributes)}`
+                                {itemIds.map(id => {
+                                    let itemEntries = Object.keys(cartItems[id].itemEntriesByAttributes);
+
+                                    return(itemEntries.map(
+                                        item => {
+                                            let uniqueId = `${id}${item}`
+                                            let quantity = cartItems[id].itemEntriesByAttributes[item];
 
                                             return(
                                                 <CartItem 
                                                     key={uniqueId}
                                                     uniqueIndex={uniqueId}
-                                                    product={item}
+                                                    product={cartItems[id].data}
+                                                    quantity={quantity}
+                                                    selectedAttributes={item}
                                                     productId={id}
-                                                    refIndex={innerIdx}
                                                 />
                                             )
                                         }
-                                    )
-                                )}
+                                    ))
+                                })}
                             </Items>
                             <div className="cart-details">
                                 <div>Tax 21%:</div>

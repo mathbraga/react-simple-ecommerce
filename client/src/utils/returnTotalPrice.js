@@ -3,9 +3,10 @@ const returnTotalPrice = (products, currency) => {
     let totalPrice = 0;
 
     items.forEach(item => {
-        products[item].forEach(product => {
-            totalPrice += product.prices[currency].amount*product.amount;
-        });
+        const price = products[item].data.prices[currency].amount;
+        const itemQuantity = products[item].totalInCart;
+
+        totalPrice += price*itemQuantity;
     })
 
     return totalPrice;

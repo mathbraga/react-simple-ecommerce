@@ -73,7 +73,7 @@ class CartOverlay extends PureComponent {
         const { quantity, items, currency } = this.props;
         const itemIds = Object.keys(items);
         const currencySymbol = itemIds.length ? 
-                    items[itemIds[0]][0].prices[currency].currency.symbol : "";
+                    items[itemIds[0]].data.prices[currency].currency.symbol : "";
 
         return(
             <Styles>

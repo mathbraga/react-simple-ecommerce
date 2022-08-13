@@ -80,17 +80,21 @@ class CartThumbnails extends PureComponent{
     }
 
     componentDidMount = () => {
-        const { uniqueIdx } = this.props; 
-        const imgContainer = document.getElementById(`img-container-${uniqueIdx}`);
+        if(this.props.images.length > 1){
+            const { uniqueIdx } = this.props; 
+            const imgContainer = document.getElementById(`img-container-${uniqueIdx}`);
 
-        imgContainer.addEventListener("transitionend", this.removeTransition);
+            imgContainer.addEventListener("transitionend", this.removeTransition);
+        }
     }
 
     componentWillUnmount = () => {
-        const { uniqueIdx } = this.props; 
-        const imgContainer = document.getElementById(`img-container-${uniqueIdx}`);
+        if(this.props.images.length > 1){
+            const { uniqueIdx } = this.props; 
+            const imgContainer = document.getElementById(`img-container-${uniqueIdx}`);
 
-        imgContainer.removeEventListener("transitionend", this.removeTransition);
+            imgContainer.removeEventListener("transitionend", this.removeTransition);
+        }
     }
 
     render(){

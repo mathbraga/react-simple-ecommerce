@@ -60,11 +60,10 @@ class CartItem extends PureComponent {
             brand,
             prices,
             gallery,
-            attributes,
-            selectedAttributes,
-            amount
+            attributes
         } = this.props.product;
-        const { productId, refIndex, updateQuantity } = this.props;
+        const { productId, quantity, updateQuantity, selectedAttributes } = this.props;
+        const selections = JSON.parse(selectedAttributes);
 
         return(
             <Styles>
@@ -81,7 +80,7 @@ class CartItem extends PureComponent {
                                     attribute={item}
                                     key={index}
                                     refIndex={index}
-                                    selection={selectedAttributes[index]}
+                                    selection={selections[index]}
                                 />
                         )}
                     </div>
@@ -90,14 +89,14 @@ class CartItem extends PureComponent {
                     <div className="product-amount">
                         <div 
                             className="quantity-btn" 
-                            onClick={() => updateQuantity(1, productId, refIndex)}
+                            onClick={() => updateQuantity(1, productId, selectedAttributes)}
                         >
                             <img src={addIcon} alt="add product" />
                         </div>
-                        {amount}
+                        {quantity}
                         <div 
                             className="quantity-btn" 
-                            onClick={() =>updateQuantity(-1, productId, refIndex)}
+                            onClick={() =>updateQuantity(-1, productId, selectedAttributes)}
                         >
                             <img src={removeIcon} alt="remove product" />
                         </div>
@@ -110,8 +109,8 @@ class CartItem extends PureComponent {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    updateQuantity: (updateValue, productId, itemIndex) => 
-        dispatch(updateItemAmount({ updateValue, productId, itemIndex }))
+    updateQuantity: (updateValue, productId, itemAttributes) => 
+        dispatch(updateItemAmount({ updateValue, productId, itemAttributes }))
 });
 
 export default connect(null, mapDispatchToProps)(CartItem);

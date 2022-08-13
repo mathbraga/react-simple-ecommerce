@@ -10,14 +10,19 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addItemToCart: (state, action) => {
-            let { id, ...restOfData } = action.payload; 
+            let { id, selectedAttributes, amount, ...restOfData } = action.payload;
+            let stringAttributes = JSON.stringify(selectedAttributes);
 
             // if new product is not in cart, add it
             if(state.cartItems[action.payload.id] == null){
                 let newItem = {
-                    [id]: [{
-                        ...restOfData
-                    }]
+                    [id]: {
+                        data: {...restOfData},
+                        itemEntriesByAttributes: {
+                            [stringAttributes]: amount
+                        },
+                        totalInCart: 1
+                    }
                 }
 
                 state.cartItems = {
@@ -27,20 +32,11 @@ export const cartSlice = createSlice({
             }
             else{// if new product is in cart, check if chosen attributes are the exact same
                  // if exact attributes, just increment amount of said product, else add new entry
-                let isExactProduct = false;
+                state.cartItems[action.payload.id].itemEntriesByAttributes[stringAttributes] ? 
+                    state.cartItems[action.payload.id].itemEntriesByAttributes[stringAttributes] += 1 :
+                    state.cartItems[action.payload.id].itemEntriesByAttributes[stringAttributes] = 1;
 
-                state.cartItems[action.payload.id].some(
-                    item => {
-                        isExactProduct = hasExactAttributes(item, action.payload);
-
-                        if(isExactProduct)
-                            item.amount++;
-
-                        return isExactProduct;
-                    });
-
-                if(!isExactProduct)
-                    state.cartItems[action.payload.id].push({...restOfData});
+                state.cartItems[action.payload.id].totalInCart += 1;
             }
             
             // add to total cart amount regardless
@@ -49,16 +45,18 @@ export const cartSlice = createSlice({
         },
 
         updateItemAmount: (state, action) => {
-            let { updateValue, productId, itemIndex } = action.payload;
+            let { updateValue, productId, itemAttributes } = action.payload;
 
-            state.cartItems[productId][itemIndex].amount += updateValue;
+            state.cartItems[productId].itemEntriesByAttributes[itemAttributes] += updateValue;
+            state.cartItems[productId].totalInCart += updateValue;
             
             // if specific item amount is 0, remove from list
-            if(!state.cartItems[productId][itemIndex].amount)
-                state.cartItems[productId].splice(itemIndex, 1);
+            if(!state.cartItems[productId].itemEntriesByAttributes[itemAttributes])
+                delete state.cartItems[productId].itemEntriesByAttributes[itemAttributes];
             
             // if 0 products of that id, remove from cart
-            if(!state.cartItems[productId].length){
+            const itemEntries = Object.keys(state.cartItems[productId].itemEntriesByAttributes);
+            if(!itemEntries.length){
                 delete state.cartItems[productId];
             }
 
