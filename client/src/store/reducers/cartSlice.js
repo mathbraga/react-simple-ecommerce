@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import hasExactAttributes from "../../utils/hasExactAttributes";
 
 const initialState = {
     cartItems: localStorage.cartItems ?  JSON.parse(localStorage.cartItems) : {cartAmount: 0},
