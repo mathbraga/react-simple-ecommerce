@@ -6,7 +6,9 @@ import ButtonContainer from '../../containers/HeaderLinkContainer';
 import logoIcon from '../../assets/icons/a-logo.svg';
 import CurrencySwitcher from '../CurrencySwitcher';
 import Cart from '../Cart';
+import CartOverlay from '../CartOverlay';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const PageOverlay = styled.div`
     position: absolute;
@@ -37,6 +39,9 @@ class Header extends PureComponent{
     }
 
     render(){
+        const { cartAmount, ...cartItems } = this.props.cartItems;
+        const { currency } = this.props
+
         return(
             <div>
                 <HeaderContainer>
@@ -69,7 +74,14 @@ class Header extends PureComponent{
                     <img src={logoIcon} alt="Header logo" />
                     <HeaderButtonsContainer>
                         <CurrencySwitcher />
-                        <Cart isOverlay={this.state.cartOverlay} onClick={this.toggleOverlay} />
+                        <Cart onClick={this.toggleOverlay} />
+                        {this.state.cartOverlay ? 
+                            <CartOverlay 
+                                quantity={cartAmount} 
+                                cartItems={cartItems}
+                                currency={currency}
+                                triggerer={this.toggleOverlay}
+                            /> : null}
                     </HeaderButtonsContainer>
                 </HeaderContainer>
                 {this.state.cartOverlay ? <PageOverlay /> : null}
@@ -78,4 +90,9 @@ class Header extends PureComponent{
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+    cartItems: state.cart.cartItems,
+    currency: state.currency.defaultCurrency
+})
+
+export default connect(mapStateToProps)(Header);

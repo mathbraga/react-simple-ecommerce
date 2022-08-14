@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import cartIcon from '../../assets/icons/cart.svg';
-import CartOverlay from "../CartOverlay";
 
 const Styles = styled.div`
     display: flex;
@@ -30,33 +29,31 @@ const Styles = styled.div`
         background-color: var(--color-black);
 
         transform: translate(10px, -8px);
+
+        pointer-events: none;
+    }
+
+    img{
+        pointer-events: none;
     }
 `;
 
 class Cart extends PureComponent {
     render(){
-        const { cartAmount, ...cartItems } = this.props.cartItems;
-        const { currency } = this.props
+        const { cartAmount } = this.props;
 
         return(
-            <Styles onClick={this.props.onClick}>
+            <Styles onClick={this.props.onClick} id="cart-btn">
                 <img src={cartIcon} alt="Cart" />
                 {cartAmount ? 
                     <div className="cart-counter">{cartAmount}</div> : null}
-                {this.props.isOverlay ? 
-                    <CartOverlay 
-                        quantity={cartAmount} 
-                        cartItems={cartItems}
-                        currency={currency}
-                    /> : null}
             </Styles>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    cartItems: state.cart.cartItems,
-    currency: state.currency.defaultCurrency
+    cartAmount: state.cart.cartItems.cartAmount
 })
 
 export default connect(mapStateToProps)(Cart);

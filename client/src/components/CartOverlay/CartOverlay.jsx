@@ -84,21 +84,22 @@ const Styles = styled.div`
 `;
 
 class CartOverlay extends PureComponent {
-    // closeMenu = (event) => {
-    //     const notButtonOrMenu = event.target.id !== this.props.triggererId;
+    closeMenu = (event) => {
+        const container = document.getElementById("cart-overlay");
+        const notMenu = event.target.id !== "cart-btn" && !container.contains(event.target);
 
-    //     if(notButtonOrMenu){
-    //         this.props.trigger();
-    //     }
-    // }
+        if(notMenu || event.target.id === "cart-link"){
+            this.props.triggerer();
+        }
+    }
 
-    // componentDidMount = () => {
-    //     document.addEventListener("click", this.closeMenu);
-    // }
+    componentDidMount = () => {
+        document.addEventListener("click", this.closeMenu);
+    }
 
-    // componentWillUnmount = () => {
-    //     document.removeEventListener("click", this.closeMenu);
-    // }
+    componentWillUnmount = () => {
+        document.removeEventListener("click", this.closeMenu);
+    }
 
     render(){
         const { quantity, cartItems, currency } = this.props;
@@ -107,7 +108,7 @@ class CartOverlay extends PureComponent {
                 cartItems[itemIds[0]].data.prices[currency].currency.symbol : "";
 
         return(
-            <Styles>
+            <Styles id="cart-overlay">
                 <div style={{fontWeight: "700"}}>
                     My bag, <span style={{fontWeight: "500"}}>{quantity} items</span>
                 </div>
@@ -143,7 +144,7 @@ class CartOverlay extends PureComponent {
                 </div>
                 <div className="btn-section">
                     <Link to="/cart">
-                        <Button className="btn-overlay btn-bag">
+                        <Button className="btn-overlay btn-bag" id="cart-link">
                             VIEW BAG
                         </Button>
                     </Link>

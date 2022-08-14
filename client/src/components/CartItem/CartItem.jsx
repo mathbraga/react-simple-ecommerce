@@ -67,6 +67,12 @@ const Styles = styled.div`
 `;
 
 class CartItem extends PureComponent {
+    handleClick = (event, updateValue, productId, itemAttributes) => {
+        event.stopPropagation();
+
+        this.props.updateQuantity(updateValue, productId, itemAttributes);
+    }
+
     render(){
         const {
             name,
@@ -75,7 +81,7 @@ class CartItem extends PureComponent {
             gallery,
             attributes
         } = this.props.product;
-        const { productId, quantity, updateQuantity, 
+        const { productId, quantity, 
             selectedAttributes, minified } = this.props;
         const selections = JSON.parse(selectedAttributes);
 
@@ -118,14 +124,14 @@ class CartItem extends PureComponent {
                     <div className="product-amount">
                         <div 
                             className="quantity-btn" 
-                            onClick={() => updateQuantity(1, productId, selectedAttributes)}
+                            onClick={(event) => this.handleClick(event, 1, productId, selectedAttributes)}
                         >
                             <img src={addIcon} alt="add product" />
                         </div>
                         {quantity}
                         <div 
                             className="quantity-btn" 
-                            onClick={() =>updateQuantity(-1, productId, selectedAttributes)}
+                            onClick={(event) => this.handleClick(event, -1, productId, selectedAttributes)}
                         >
                             <img src={removeIcon} alt="remove product" />
                         </div>
@@ -133,7 +139,7 @@ class CartItem extends PureComponent {
                     <CartThumbnails 
                         images={minified ? [gallery[0]] : gallery}
                         width={minified ? "120px" : "200px"}
-                        uniqueIdx={this.props.uniqueIndex} 
+                        uniqueIdx={minified ? "" : this.props.uniqueIndex} 
                     />
                 </div>
             </Styles>
