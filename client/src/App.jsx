@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Routing from "./Routing";
 import { client } from "@tilework/opus";
 
-client.setEndpoint("http://localhost:4000/");
+client.setEndpoint("https://react-project-gql-server.herokuapp.com/");
 
 class App extends PureComponent {
     render(){
