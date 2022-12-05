@@ -2,4 +2,4 @@
 
 Simple E-Commerce using React, Redux and styled-components.
 
-Deployed on Firebase: https://basicecommercereact.web.app/
+Hosted at Firebase: https://basicecommercereact.web.app/
