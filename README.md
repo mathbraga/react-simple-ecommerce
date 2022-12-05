@@ -2,4 +2,4 @@
 
 Simple E-Commerce using React, Redux and styled-components.
 
-Live demo: https://basicecommercereact.web.app/
+Deployed on Firebase: https://basicecommercereact.web.app/
