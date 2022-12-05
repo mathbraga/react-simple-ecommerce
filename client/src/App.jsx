@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Routing from "./Routing";
 import { client } from "@tilework/opus";
 
-client.setEndpoint("https://react-project-gql-server.herokuapp.com/");
+client.setEndpoint("https://gql-dummy-server.vercel.app/api/graphql");
 
 class App extends PureComponent {
     render(){
