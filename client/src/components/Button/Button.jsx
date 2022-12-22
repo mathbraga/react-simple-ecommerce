@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Styles = styled.button`
     color: ${props => props.textColor || 'inherit'};
