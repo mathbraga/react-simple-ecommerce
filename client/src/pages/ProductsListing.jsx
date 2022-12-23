@@ -3,6 +3,7 @@ import Title from "../components/Title";
 import PageContainer from "../containers/PageContainer";
 import ProductPageContent from "../components/ProductPageContent";
 import DataContext from "../helpers/DataContext";
+import PropTypes from "prop-types";
 
 class ProductsListing extends PureComponent {
   filterByCategory = (productsArray) => {
@@ -30,5 +31,9 @@ class ProductsListing extends PureComponent {
   }
 }
 ProductsListing.contextType = DataContext;
+
+ProductsListing.propTypes = {
+  category: PropTypes.string.isRequired,
+};
 
 export default ProductsListing;
