@@ -14,6 +14,7 @@ const prepareQuery = () => {
   const productFields = [
     "id",
     "name",
+    "category",
     "inStock",
     "gallery",
     "description",

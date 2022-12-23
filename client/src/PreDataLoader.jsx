@@ -28,7 +28,9 @@ class PreDataLoader extends PureComponent {
   render() {
     return (
       <DataContext.Provider
-        value={{ products: this.state.allProducts.categories }}
+        value={{
+          products: this.state.allProducts.categories,
+        }}
       >
         <Routing />
       </DataContext.Provider>

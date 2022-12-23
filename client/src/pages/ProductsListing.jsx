@@ -8,11 +8,9 @@ import PropTypes from "prop-types";
 class ProductsListing extends PureComponent {
   filterByCategory = (productsArray) => {
     const result = productsArray
-      ? productsArray.filter(
-          (products) => products.name === this.props.category
-        )
-      : [{ products: [] }];
-    const { products } = result[0];
+      ? productsArray.find((products) => products.name === this.props.category)
+      : { products: [] };
+    const { products } = result;
 
     return products;
   };
